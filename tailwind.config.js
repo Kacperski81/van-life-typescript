@@ -17,6 +17,9 @@ export default {
         'footer': '#252525',
         'font-footer': '#AAAAAA',
         'light-orange': '#FFCC8D',
+        'filter-bg': '#FFEAD0',
+        'filter-color': '#4D4D4D',
+        'rent-button': '#FF8C38'
       },
       backgroundImage: {
         'hero-image': "url('/background.png')"
