@@ -5,4 +5,5 @@ export interface vanType {
     description: string
     imageUrl: string
     type: string
+    hostId: string
 }

@@ -1,7 +1,5 @@
 import { NavLink } from "react-router-dom";
-//FFF7ED - background color
-//link incactive: #4D4D4D
-//link active: #161616
+
 export function Header() {
     return (
         <header className="flex px-4">
@@ -9,10 +7,13 @@ export function Header() {
                 <NavLink className="text-[26px] leading-[40px] font-extrabold text-black" to="/">#VANLIFE</NavLink>
                 <ul className="flex flex-row text-xs leading-6">
                     <li className="mr-3">
-                        <NavLink to="/about">About</NavLink>
+                        <NavLink to="/host" className={({isActive}) => isActive ? "text-[#161616] font-bold underline" : "text-grey-500"}>Host</NavLink>
+                    </li>
+                    <li className="mr-3">
+                        <NavLink to="/about" className={({isActive}) => isActive ? "text-[#161616] font-bold underline" : "text-grey-500"}>About</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/vans">Vans</NavLink>
+                        <NavLink to="/vans" className={({isActive}) => isActive ? "text-[#161616] font-bold underline" : "text-grey-500"}>Vans</NavLink>
                     </li>
                 </ul>
             </nav>
