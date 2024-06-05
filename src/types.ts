@@ -7,3 +7,9 @@ export interface vanType {
     type: string
     hostId: string
 }
+
+export type errorType =  {
+    message: string
+    statusText: string
+    status: number
+}

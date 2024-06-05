@@ -20,7 +20,7 @@ export function HostVanDetails() {
 
     return (
         <div className="mt-8 px-4">
-            <Link to=".." relative="path" className="text-[#201F1D]">Back to all vans</Link>
+            <Link to=".." relative="path" className="text-[#201F1D]">⬅️<span>Back to all vans</span></Link>
 
             <div className="bg-white mt-4 p-4 grow rounded-lg">
                 {hostVan ? (

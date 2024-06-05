@@ -6,12 +6,24 @@ interface VanCardProps {
     price: number
     type: string
     id: string
+    searchParams: URLSearchParams
 }
 
-export function VanCard({ image, price, name, type, id }: VanCardProps) {
+export function VanCard({ image, price, name, type, id, searchParams }: VanCardProps) {
+    // console.log(searchParams.toString())
+    const filterTypeURL: string | null = searchParams.toString() || null
+    const filterType : string | null = searchParams.get("type") || null
     return (
         <div className="max-w-full mb-3">
-            <Link to={`/vans/${id}`} aria-label={`View details for ${name} priced at $${price} per day`}>
+            <Link
+                to={id}
+                state={
+                    {
+                        filter: filterType,
+                        search: filterTypeURL
+                    }
+                }
+                aria-label={`View details for ${name} priced at $${price} per day`}>
 
                 <img src={image} className="max-w-full mb-2" alt={`Image of ${name}`} />
                 <div className="flex flex-row justify-between">
