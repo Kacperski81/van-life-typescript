@@ -1,11 +1,15 @@
 import { FilterButton } from "../Components/FilterButton"
 import { VanCard } from "../Components/VanCard"
-import { useVans } from "../hooks/useVan"
-import { useSearchParams } from "react-router-dom"
+// import { useVans } from "../hooks/useVan"
+import { useSearchParams, useLoaderData } from "react-router-dom"
 import { vanType } from "../types"
+// import { getVans } from "../api"
 
 export function Vans() {
-    const { vans, loading, error } = useVans()
+    // const vans = useLoaderData()
+    const vans = useLoaderData() as vanType[]
+    // console.log(loaderData)
+    // const { vans, loading, error } = useVans()
     const [searchParams, setSearchParams] = useSearchParams()
     const typeFilter: string | null = searchParams.get("type")
     
@@ -13,11 +17,11 @@ export function Vans() {
     const filters: string[] = ["Simple", "Luxury", "Rugged"]
 
     const filteredVans: vanType[] | null = typeFilter
-        ? vans?.filter(van => van.type === typeFilter) ?? []
+        ? vans.filter(van => van.type === typeFilter) ?? []
         : vans ?? []
 
-    if(loading) return <h2 aria-live="polite">Loading...</h2>
-    if(error) return <h2 aria-live="assertive">{error.message}</h2>
+    // if(loading) return <h2 aria-live="polite">Loading...</h2>
+    // if(error) return <h2 aria-live="assertive">{error.message}</h2>
 
     return (
         <div className="grow px-4">
