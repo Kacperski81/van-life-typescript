@@ -2,7 +2,7 @@ export function About() {
     return (
         <section className="flex flex-col">
             <div className=""> 
-                <img src="./hero-about-hd.png" alt="van at night" className="w-full" />
+                <img src="./hero-about.png" alt="van at night" className="w-full" />
             </div>
             <div className="px-4 my-4 text-justify">
                 <h2 className="my-6">Don't squeeze in a sedan when you could relax in a van.</h2>

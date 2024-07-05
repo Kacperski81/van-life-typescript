@@ -36,7 +36,7 @@ export function Login() {
     }
 
     return (
-        <div className="my-0 mx-auto bg-background">
+        <div className="my-0 w-full bg-background">
             <Form method="post" className="flex flex-col gap-3 px-4 py-4">
                 <h1 className="text-3xl font-bold">Sign in to your account</h1>
                 <h2 className="text-2xl text-red-500 text-center">{actionData && isErrorType(actionData) ? actionData.message : ""}</h2>
