@@ -32,7 +32,7 @@ export function Vans() {
             <div className="flex flex-row mb-4">
 
                 {filters.map(filter => (
-                    <FilterButton key={filter} text={filter} typeFilter={typeFilter} setSearchParams={setSearchParams} />
+                    <FilterButton key={filter} text={filter} typeFilter={typeFilter ? typeFilter : ""} setSearchParams={setSearchParams} />
                 ))}
 
                 { typeFilter ? (<button
