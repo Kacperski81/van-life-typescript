@@ -13,6 +13,7 @@ export function Vans() {
     const [searchParams, setSearchParams] = useSearchParams()
     const typeFilter: string | null = searchParams.get("type")
     
+    
 
     const filters: string[] = ["Simple", "Luxury", "Rugged"]
 
@@ -24,14 +25,14 @@ export function Vans() {
     // if(error) return <h2 aria-live="assertive">{error.message}</h2>
 
     return (
-        <div className="grow px-4">
+        <div className="grow px-4 bg-background">
 
             <h2 className="mb-4 text-center">Explore our van options</h2>
 
             <div className="flex flex-row mb-4">
 
                 {filters.map(filter => (
-                    <FilterButton key={filter} text={filter} setSearchParams={setSearchParams} />
+                    <FilterButton key={filter} text={filter} typeFilter={typeFilter} setSearchParams={setSearchParams} />
                 ))}
 
                 { typeFilter ? (<button

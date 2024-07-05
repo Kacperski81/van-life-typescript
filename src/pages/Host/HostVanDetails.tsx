@@ -1,22 +1,11 @@
-import { Link, NavLink, Outlet, useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { Link, NavLink, Outlet, useLoaderData } from "react-router-dom";
 import { vanType } from "../../types";
 
 export type ContextType = { hostVan: vanType | null }
 
 export function HostVanDetails() {
-    const { id } = useParams()
-    const [hostVan, setHostVan] = useState<vanType | null>(null)
-
-    useEffect(() => {
-        async function getHostVan() {
-            const response = await fetch(`/api/host/vans/${id}`)
-            const data = await response.json()
-            // console.log(data.vans)
-            setHostVan(data.vans)
-        }
-        getHostVan()
-    }, [id])
+   
+    const hostVan: vanType = useLoaderData() as vanType
 
     return (
         <div className="mt-8 px-4">

@@ -1,4 +1,4 @@
-import { RouterProvider, Route, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
+import { RouterProvider, createBrowserRouter} from "react-router-dom";
 import { Layout } from "./Layout";
 import { Home } from "./pages/Home";
 import { About } from "./pages/About";
@@ -14,31 +14,101 @@ import { HostVanInfo } from "./pages/Host/HostVanInfo";
 import { HostVanPrice } from "./pages/Host/HostVanPrice";
 import { HostVanPhoto } from "./pages/Host/HostVanPhoto";
 import { Error } from "./Components/Error";
-import { loader as vansLoader } from "./loaders";
-import "./server"
+import { loader as vansLoader, vanDetailsLoader, hostVansLoader, hostVanDetailsLoader } from "./loaders";
 import { Login } from "./Components/Login";
+import { loginAction } from "./actions";
+import { requireAuth } from "./utils";
 
-const router = createBrowserRouter(createRoutesFromElements(
-  <Route path="/" element={<Layout />}>
-  <Route index element={<Home />} />
-  <Route path="about" element={<About />} />
-  <Route path="vans" element={<Vans />} loader={vansLoader} errorElement={<Error />} />
-  <Route path="login" element={<Login />} />
-  <Route path="vans/:id" element={<VanDetails />} />
-  <Route path="host" element={<HostLayout />}>
-    <Route index element={<Dashboard />} />
-    <Route path="income" element={<Income />} />
-    <Route path="reviews" element={<Reviews />} />
-    <Route path="vans" element={<HostVans />} />
-    <Route path="vans/:id" element={<HostVanDetails />}>
-      <Route index element={<HostVanInfo />} />
-      <Route path="pricing" element={<HostVanPrice />} />
-      <Route path="photos" element={<HostVanPhoto />} />
-    </Route>
-  </Route>
-  <Route path="*" element={<h1>Not Found</h1>} />
-</Route>
-))
+import "./server"
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
+      {
+        index: true,
+        element: <Home />
+      },
+      {
+        path: "about",
+        element: <About />
+      },
+      {
+        path: "vans",
+        element: <Vans />,
+        loader: vansLoader,
+        errorElement: <Error />
+      },
+      {
+        path: "login",
+        element: <Login />,
+        action: loginAction,
+        
+      },
+      {
+        path: "vans/:id",
+        element: <VanDetails />,
+        loader: vanDetailsLoader,
+        errorElement: <h1>van don't exists</h1>
+      },
+      {
+        path: "host",
+        element: <HostLayout />,
+        loader: () => requireAuth(),
+        errorElement: <Error />,
+        children: [
+          {
+            index: true,
+            element: <Dashboard />,
+            loader: () => requireAuth()
+          },
+          {
+            path: "income",
+            element: <Income />,
+            loader: () => requireAuth(),
+          },
+          // localhost:5173/host/income
+          {
+            path: "reviews",
+            element: <Reviews />,
+            loader: () => requireAuth(),
+          },
+          {
+            path: "vans",
+            element: <HostVans />,
+            loader: hostVansLoader,
+            errorElement: <Error />,
+          },
+          {
+            path: "vans/:id",
+            element: <HostVanDetails />,
+            loader: hostVanDetailsLoader,
+            children: [
+              {
+                index: true,
+                element: <HostVanInfo />
+              },
+              {
+                path: "pricing",
+                element: <HostVanPrice />
+              },
+              {
+                path: "photos",
+                element: <HostVanPhoto />
+              }
+            ]
+          },
+        ]
+      },
+      {
+        path: "*",
+        element: <h2>Not Found</h2>
+      }
+    ]
+  }
+]
+)
 
 export function App() {
   return (

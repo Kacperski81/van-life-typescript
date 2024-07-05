@@ -9,9 +9,6 @@ export default {
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
       },
-      gridTemplateRows: {
-        'layout': '80px 1fr 50px'
-      },
       colors: {
         'background': '#FFF7ED',
         'footer': '#252525',

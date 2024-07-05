@@ -1,8 +1,9 @@
 import { Outlet, NavLink } from "react-router-dom";
 
 export function HostLayout() {
+    
     return (
-        <div className="grow">
+        <div className="grow bg-background">
             <nav className="flex gap-5 px-4">
                 <NavLink end to="." className={({isActive}) => isActive ? "text-[#161616] underline font-bold" : "text-grey"}>Dashboard</NavLink>
                 <NavLink to="income" className={({isActive}) => isActive ? "text-[#161616] underline font-bold" : "text-grey"}>Income</NavLink>
