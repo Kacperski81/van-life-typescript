@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 html {
-  /* @apply bg-gray-100; */
+  @apply bg-[#FFF7ED];
 }
 
 h2 {
@@ -11,7 +11,7 @@ h2 {
 }
 
 .header-link {
-  @apply no-underline text-[#4D4D4D]
+  @apply no-underline text-[#4D4D4D] 
 }
 
 .header-link-active {
@@ -19,5 +19,5 @@ h2 {
 }
 
 .header-link:hover {
-  @apply text-red-500 font-bold
+  @apply text-[#161616] font-bold
 }

@@ -20,8 +20,9 @@ export function Header({ navToggle, handleNavToggle }: HeaderProps) {
             <div className={clsx("ml-4 flex-shrink-0")}>
 
                 <NavLink end to="/">
-                    <span className="text-[26px] leading-[40px] font-extrabold text-black">#VANLIFE</span>
+                    {/* <span className="text-[26px] leading-[40px] font-extrabold text-black">#VANLIFE</span> */}
                     {/* #VANLIFE */}
+                    <img src="/logo.png" alt="VanLife Logo" />
                 </NavLink>
 
             </div>

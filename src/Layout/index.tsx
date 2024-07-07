@@ -7,16 +7,15 @@ import clsx from "clsx"
 export function Layout() {
     const [navToggle, setNavToggle] = useState<boolean>(true)
     const location = useLocation()
-
-    const handleNavToggle = () => {
-        console.log('clicked')
-        setNavToggle(prev => !prev)
-    }
-
+        
     useEffect(() => {
         setNavToggle(true)
     }, [location.pathname])
     
+    const handleNavToggle = () => {
+        console.log('clicked')
+        setNavToggle(prev => !prev)
+    }
     return (
         // <div className="grid grid-rows-layout font-sans max-w-screen-2xl mx-auto h-screen">
         <div
