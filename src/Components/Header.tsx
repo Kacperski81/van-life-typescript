@@ -3,32 +3,32 @@ import { useUser } from "../UserContext"
 import IconHamburgerMenu from "./IconHamburgerMenu"
 import clsx from "clsx"
 
-type PropsHeader = {
+type HeaderProps = {
     navToggle: boolean
     handleNavToggle: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export function Header({ navToggle, handleNavToggle }: PropsHeader) {
+export function Header({ navToggle, handleNavToggle }: HeaderProps) {
 
     const navigate = useNavigate()
     const user = useUser()
-    
+
     return (
 
-        <header className={clsx("flex items-center justify-between flex-wrap w-full pt-4")}>
+        <header className={clsx("flex items-center justify-between flex-wrap w-full p-2")}>
 
-            <div
-                className={clsx("ml-4 flex-shrink-0")}>
+            <div className={clsx("ml-4 flex-shrink-0")}>
 
-                <NavLink to="/">
+                <NavLink end to="/">
                     <span className="text-[26px] leading-[40px] font-extrabold text-black">#VANLIFE</span>
+                    {/* #VANLIFE */}
                 </NavLink>
+
             </div>
 
             <button
                 className="md:hidden p-2 mr-4 my-2 border rounded border-grey-600"
                 onClick={() => handleNavToggle(navToggle)}
-                    
             >
                 <span><IconHamburgerMenu /></span>
             </button>
@@ -36,18 +36,34 @@ export function Header({ navToggle, handleNavToggle }: PropsHeader) {
             <div
                 className={clsx("w-full md:w-auto md:block")}
             >
-                <ul className="px-4">
-                    <li>
-                        <NavLink to="/host">Host</NavLink>
+                <ul className="px-4 md:px-0 md:grid md:grid-cols-[70px_70px_70px_70px]">
+                
+                    <li className="md:flex md:justify-center">
+                        <NavLink
+                            to="/host"
+                            className={({ isActive }) => isActive ? "header-link-active" : "header-link"}
+                        >
+                            Host
+                        </NavLink>
                     </li>
-                    <li>
-                        <NavLink to="/about">About</NavLink>
+                    <li className="md:flex md:justify-center">
+                        <NavLink
+                            to="/about"
+                            className={({ isActive }) => isActive ? "header-link-active" : "header-link"}
+                        >
+                            About
+                        </NavLink>
                     </li>
-                    <li>
-                        <NavLink to="/vans">Vans</NavLink>
+                    <li className="md:flex md:justify-center">
+                        <NavLink 
+                        to="/vans"
+                        className={({ isActive }) => isActive ? "header-link-active" : "header-link"}
+                        >
+                            Vans
+                            </NavLink>
                     </li>
                     {user.isLoggedIn ? (
-                        <li>
+                        <li className="md:flex md:justify-center">
                             <p onClick={() => {
                                 user.setUser(() => {
                                     return {
@@ -58,12 +74,17 @@ export function Header({ navToggle, handleNavToggle }: PropsHeader) {
                                     }
                                 })
                                 localStorage.removeItem('vanLife')
-                                return navigate("/login")
-                            }}>Logout</p>
+                                return navigate("/")
+                            }}><NavLink to="/" className="hover:text-red-500 hover:font-bold">Logout</NavLink></p>
                         </li>
                     ) : (
-                        <li>
-                            <NavLink to="/login">Login</NavLink>
+                        <li className="md:flex md:justify-center">
+                            <NavLink 
+                            to="/login"
+                            className={({ isActive }) => isActive ? "header-link-active" : "header-link"}
+                            >
+                                Login
+                                </NavLink>
                         </li>
                     )}
                 </ul>

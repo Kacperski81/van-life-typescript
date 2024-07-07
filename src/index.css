@@ -3,10 +3,21 @@
 @tailwind utilities;
 
 html {
-  @apply bg-gray-100;
-  /* Example: using Tailwind's gray-100 color */
+  /* @apply bg-gray-100; */
 }
 
 h2 {
   @apply text-[30px] font-bold leading-[34px]
+}
+
+.header-link {
+  @apply no-underline text-[#4D4D4D]
+}
+
+.header-link-active {
+  @apply underline font-bold text-[#161616]
+}
+
+.header-link:hover {
+  @apply text-red-500 font-bold
 }
