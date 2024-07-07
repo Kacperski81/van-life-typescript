@@ -12,7 +12,7 @@ interface VanCardProps {
 export function VanCard({ image, price, name, type, id, searchParams }: VanCardProps) {
     // console.log(searchParams.toString())
     const filterTypeURL: string | null = searchParams.toString() || null
-    const filterType : string | null = searchParams.get("type") || null
+    const filterType: string | null = searchParams.get("type") || null
     return (
         <div className="max-w-full mb-3">
             <Link
@@ -25,7 +25,10 @@ export function VanCard({ image, price, name, type, id, searchParams }: VanCardP
                 }
                 aria-label={`View details for ${name} priced at $${price} per day`}>
 
-                <img src={image} className="max-w-full mb-2" alt={`Image of ${name}`} />
+                <div className="aspect-[4/4] w-full bg-white bg-cover bg-center">
+                    <img src={image} className="max-w-full mb-2" alt={`Image of ${name}`} />
+                </div>
+                
                 <div className="flex flex-row justify-between">
                     <div>
                         <p className="text-[14px] font-bold">{name}</p>

@@ -2,7 +2,7 @@ import { FilterButton } from "../Components/FilterButton"
 import { VanCard } from "../Components/VanCard"
 // import { useVans } from "../hooks/useVan"
 import { useSearchParams, useLoaderData } from "react-router-dom"
-import { vanType } from "../types"
+import { vanType, Filter } from "../types"
 // import { getVans } from "../api"
 
 export function Vans() {
@@ -12,10 +12,25 @@ export function Vans() {
     // const { vans, loading, error } = useVans()
     const [searchParams, setSearchParams] = useSearchParams()
     const typeFilter: string | null = searchParams.get("type")
-    
-    
 
-    const filters: string[] = ["Simple", "Luxury", "Rugged"]
+
+    const filters: Filter[] = [
+        {
+            name: "Simple",
+            bg: "#e17654",
+            text: "#ffead0"
+        },
+        {
+            name: "Luxury",
+            bg: "#161616",
+            text: "#ffead0"
+        },
+        {
+            name: "Rugged",
+            bg: "#115e59",
+            text: "#ffead0"
+        }
+    ]
 
     const filteredVans: vanType[] | null = typeFilter
         ? vans.filter(van => van.type === typeFilter) ?? []
@@ -32,29 +47,29 @@ export function Vans() {
             <div className="flex flex-row mb-4">
 
                 {filters.map(filter => (
-                    <FilterButton key={filter} text={filter} typeFilter={typeFilter ? typeFilter : ""} setSearchParams={setSearchParams} />
+                    <FilterButton key={filter.name} filter={filter} typeFilter={typeFilter ? typeFilter : ""} setSearchParams={setSearchParams} />
                 ))}
 
-                { typeFilter ? (<button
-                    onClick={() => setSearchParams({})} 
-                    className="text-filter-color text-sm underline"
+                {typeFilter ? (<button
+                    onClick={() => setSearchParams({})}
+                    className="text-filter-color text-sm"
                 >
                     Clear filters
                 </button>) : ""}
 
             </div>
-            
+
             <div className="grid grid-cols-2 gap-x-2">
                 {filteredVans ? filteredVans.map(van => (
-                    <VanCard 
-                        key={van.id} 
-                        image={van.imageUrl} 
-                        name={van.name} 
-                        price={van.price} 
-                        type={van.type} 
+                    <VanCard
+                        key={van.id}
+                        image={van.imageUrl}
+                        name={van.name}
+                        price={van.price}
+                        type={van.type}
                         id={van.id}
                         searchParams={searchParams} />
-                )) : <p>Loading...</p>}
+                )) : <p>Error</p>}
             </div>
         </div>
     )

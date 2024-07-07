@@ -1,8 +1,8 @@
 export function About() {
     return (
-        <section className="flex flex-col">
-            <div className=""> 
-                <img src="./hero-about.png" alt="van at night" className="w-full" />
+        <section className="flex flex-col bg-background">
+            <div className="w-full pt-[39.37%] bg-[url('./hero-about.png')] md:bg-[url('./hero-about-hd.png')] bg-cover bg-center"> 
+                {/* <img src="./hero-about.png" alt="van at night" className="w-full" loading="lazy" />  */}
             </div>
             <div className="px-4 my-4 text-justify">
                 <h2 className="my-6">Don't squeeze in a sedan when you could relax in a van.</h2>

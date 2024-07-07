@@ -1,6 +1,6 @@
 export function Home() {
     return (
-        <div className="bg-hero-image bg-no-repeat bg-cover h-full text-white px-4">
+        <div className="pt-[70.65%] bg-background bg-hero-image bg-cover bg-center text-white px-4">
             <section className="flex flex-col h-full justify-center gap-10">
                 <h3 className="font-extrabold text-3xl">You got the travel plans, we got the travel vans.</h3>
                 <div className="font-medium">

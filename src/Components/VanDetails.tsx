@@ -21,8 +21,9 @@ export function VanDetails() {
 
                     </Link>
                 </p>
-
-                <img src={vanDetails.imageUrl} />
+                <div className="aspect-[4/4] bg-white bg-cover bg-center">
+                    <img src={vanDetails.imageUrl} alt={vanDetails.name}/>
+                </div>
 
                 <button
                     className="text-base my-2 py-2 px-4 bg-filter-bg rounded-lg"

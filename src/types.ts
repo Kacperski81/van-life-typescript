@@ -8,7 +8,7 @@ export interface vanType {
     hostId: string
 }
 
-export type errorType =  { 
+export type errorType = {
     message: string
     statusText: string
     status: number
@@ -37,4 +37,10 @@ export type userType = {
     email: string,
     userId: string,
     isLoggedIn: boolean
+}
+
+export type Filter = {
+    name: string
+    bg: string
+    text: string
 }
