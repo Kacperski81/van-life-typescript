@@ -23,7 +23,9 @@ export default {
         'rent-button': '#FF8C38',
       },
       backgroundImage: {
-        'hero-image': "url('/background.png')"
+        'hero-image': "url('/background.png')",
+        'about-image': "url('/hero-about.png')",
+        'about-image-hd': "url('/hero-about-hd.png')",
       }
     },
   },

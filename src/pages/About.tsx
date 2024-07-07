@@ -1,7 +1,7 @@
 export function About() {
     return (
         <section className="flex flex-col bg-background">
-            <div className="w-full pt-[39.37%] bg-[url('./hero-about.png')] md:bg-[url('./hero-about-hd.png')] bg-cover bg-center"> 
+            <div className="w-full pt-[39.37%] bg-about-image md:bg-about-image-hd bg-cover bg-center"> 
                 {/* <img src="./hero-about.png" alt="van at night" className="w-full" loading="lazy" />  */}
             </div>
             <div className="px-4 my-4 text-justify">
