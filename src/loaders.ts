@@ -1,23 +1,20 @@
-import { vanType } from "./types"
-import { getVans, getHostVans } from "./api"
+import { defer } from "react-router-dom"
+// import { Van } from "./types"
+import { getVan, getVans, getHostVans } from "./api"
 import { requireAuth } from "./utils"
 
-interface Params {
-    id?: string
-}
+// type Params =  {
+//     id?: string
+// }
 
-interface LoaderParams {
-    params: Params
-}
+// interface LoaderParams {
+//     params: Params
+// }
 
+// type LoaderFunctionArgs = {
+//     params: Params
+// }
 
-export async function loader(): Promise<vanType[]> {
-    const vans = await getVans()
-    if (!Array.isArray(vans)) {
-        throw new Error("Arrarys of vans expected")
-    }
-    return vans as vanType[]
-}
 
 export async function loginLoader() {
     const isLoggedIn = await requireAuth()
@@ -32,9 +29,25 @@ export async function loginLoader() {
 
 }
 
-export async function vanDetailsLoader({params}: LoaderParams): Promise<vanType[]> {
-    const van = await getVans(Number(params.id))
-    return van as vanType[]
+//LoaderFunction<any>
+
+// export async function vansLoader(): Promise<Error | Van[]> {
+export async function vansLoader() {
+        const vans =  getVans()
+        return defer({vans})
+}
+
+// export async function vanLoader({params}: LoaderFunctionArgs): Promise<Van | Error> {
+//     if(!params.id) throw new Error("Van id is required")
+//     const van = await getVan(params.id)
+//     return van
+// }
+
+
+export async function vanLoader({params}: {params: {id?: string}}) {
+    if(!params.id) throw new Error("Van id is required")
+    const van = getVan(params.id)
+    return defer({van})
 }
 
 export async function hostVansLoader() {
@@ -50,11 +63,4 @@ export async function hostVansLoader() {
     }
     return null
     
-}
-
-export async function hostVanDetailsLoader({params}: LoaderParams): Promise<vanType[]> {
-    await requireAuth()
-    if(!params.id) throw new Error("Van id is required")
-    const van = await getHostVans(params.id)
-    return van as vanType[]
 }

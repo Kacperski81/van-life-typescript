@@ -2,12 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
+
+@layer base {
+  :root {
+    --color-simple: 255 118 84;
+    --color-luxury: 22 22 22;
+    --color-rugged: 17 94 89;
+  }
+}
+
 html {
-  @apply bg-[#FFF7ED];
+  @apply bg-[#1C1C1C];
+}
+
+body {
+  @apply max-w-[1440px] mx-auto px-4 md:px-0
 }
 
 h2 {
-  @apply text-[30px] font-bold leading-[34px]
+  @apply text-[28px] md:text-[32px] font-bold leading-[34px]
+}
+
+p {
+  @apply text-[#161616] font-medium text-base leading-5
 }
 
 .header-link {

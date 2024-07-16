@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react"
 import { Form, useNavigate, useActionData, useLocation } from "react-router-dom"
-import { errorType, userType } from "../types"
+import { Error, userType } from "../types"
 import { useUser } from "../UserContext"
 // import { LoggedIn } from "./LoggedIn"
 
@@ -12,7 +12,7 @@ export function Login() {
     
     const navigate = useNavigate()
     const location = useLocation()
-    const actionData = useActionData() as userType | errorType
+    const actionData = useActionData() as userType | Error
     const memoUrl = useRef(location.state ? location.state : "/host")
     
     
@@ -31,12 +31,12 @@ export function Login() {
         
     }, [actionData, setUser, isLoggedIn, navigate]);
     
-    function isErrorType(data: userType | errorType): data is errorType {
-        return (data as errorType).message !== undefined;
+    function isErrorType(data: userType | Error): data is Error {
+        return (data as Error).message !== undefined;
     }
 
     return (
-        <div className="my-0 w-full bg-background">
+        <div className="my-0 w-full md:w-[500px] md:mx-auto bg-background">
             <Form method="post" className="flex flex-col gap-3 px-4 py-4">
                 <h1 className="text-3xl font-bold">Sign in to your account</h1>
                 <h2 className="text-2xl text-red-500 text-center">{actionData && isErrorType(actionData) ? actionData.message : ""}</h2>

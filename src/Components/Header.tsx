@@ -22,7 +22,9 @@ export function Header({ navToggle, handleNavToggle }: HeaderProps) {
                 <NavLink end to="/">
                     {/* <span className="text-[26px] leading-[40px] font-extrabold text-black">#VANLIFE</span> */}
                     {/* #VANLIFE */}
-                    <img src="/logo.png" alt="VanLife Logo" />
+                    <div className="w-28 md:w-52 shadow-lg">
+                        <img className="" src="/logo.png" alt="VanLife Logo" />
+                    </div>
                 </NavLink>
 
             </div>
@@ -38,7 +40,7 @@ export function Header({ navToggle, handleNavToggle }: HeaderProps) {
                 className={clsx("w-full md:w-auto md:block")}
             >
                 <ul className="px-4 md:px-0 md:grid md:grid-cols-[70px_70px_70px_70px]">
-                
+
                     <li className="md:flex md:justify-center">
                         <NavLink
                             to="/host"
@@ -56,36 +58,43 @@ export function Header({ navToggle, handleNavToggle }: HeaderProps) {
                         </NavLink>
                     </li>
                     <li className="md:flex md:justify-center">
-                        <NavLink 
-                        to="/vans"
-                        className={({ isActive }) => isActive ? "header-link-active" : "header-link"}
+                        <NavLink
+                            to="/vans"
+                            className={({ isActive }) => isActive ? "header-link-active" : "header-link"}
                         >
                             Vans
-                            </NavLink>
+                        </NavLink>
                     </li>
                     {user.isLoggedIn ? (
                         <li className="md:flex md:justify-center">
-                            <p onClick={() => {
-                                user.setUser(() => {
-                                    return {
-                                        userName: "",
-                                        email: "",
-                                        userId: "",
-                                        isLoggedIn: false
-                                    }
-                                })
-                                localStorage.removeItem('vanLife')
-                                return navigate("/")
-                            }}><NavLink to="/" className="hover:text-red-500 hover:font-bold">Logout</NavLink></p>
+                            <NavLink
+                                onClick={() => {
+                                    user.setUser(() => {
+                                        return {
+                                            userName: "",
+                                            email: "",
+                                            userId: "",
+                                            isLoggedIn: false
+                                        }
+                                    })
+                                    localStorage.removeItem('vanLife')
+                                    return navigate("/")
+                                }}
+                                to="/"
+                                className="header-link"
+                                // className="hover:text-red-500 hover:font-bold"
+                            >
+                                Logout
+                            </NavLink>
                         </li>
                     ) : (
                         <li className="md:flex md:justify-center">
-                            <NavLink 
-                            to="/login"
-                            className={({ isActive }) => isActive ? "header-link-active" : "header-link"}
+                            <NavLink
+                                to="/login"
+                                className={({isActive}) => isActive ? "header-link-active" : "header-link"}
                             >
                                 Login
-                                </NavLink>
+                            </NavLink>
                         </li>
                     )}
                 </ul>

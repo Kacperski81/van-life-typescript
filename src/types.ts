@@ -1,4 +1,4 @@
-export interface vanType {
+export type Van = {
     id: string
     name: string
     price: number
@@ -8,7 +8,7 @@ export interface vanType {
     hostId: string
 }
 
-export type errorType = {
+export type Error = {
     message: string
     statusText: string
     status: number

@@ -22,16 +22,23 @@ createServer({
         this.logging = false
         // this.timing = 1000
 
-        this.get("/vans", (schema, request) => {
-            console.log(request)
-            return schema.vans.all()
+        this.get("/vans", (schema) => {
+            const vans = schema.vans.all()
+            if(!vans) {
+                return new Response(400, {}, {error: "Error fetching data"})
+            }
+            return vans
             
             // return new Response(400, {}, {error: "Error fetching data"})
         })
 
         this.get("/vans/:id", (schema, request) => {
             const id = request.params.id
-            return schema.vans.find(id)
+            const van = schema.vans.find(id)
+            if(!van) {
+                return new Response(400, {}, {error: "Van not found"})
+            }
+            return van
         })
 
         this.get("/host/vans", (schema, request) => {

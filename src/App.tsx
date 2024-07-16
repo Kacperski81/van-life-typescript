@@ -14,10 +14,15 @@ import { HostVanInfo } from "./pages/Host/HostVanInfo";
 import { HostVanPrice } from "./pages/Host/HostVanPrice";
 import { HostVanPhoto } from "./pages/Host/HostVanPhoto";
 import { Error } from "./Components/Error";
-import { loader as vansLoader, vanDetailsLoader, hostVansLoader, hostVanDetailsLoader } from "./loaders";
+import { VansError } from "./Components/VansError";
+import { 
+  vansLoader, 
+  vanLoader, 
+  hostVansLoader } from "./loaders";
 import { Login } from "./Components/Login";
 import { loginAction } from "./actions";
 import { requireAuth } from "./utils";
+// import { getVans } from "./api";
 
 import "./server"
 
@@ -38,6 +43,9 @@ const router = createBrowserRouter([
         path: "vans",
         element: <Vans />,
         loader: vansLoader,
+        // loader: async () => {
+        //   return getVans()
+        // },
         errorElement: <Error />
       },
       {
@@ -49,8 +57,8 @@ const router = createBrowserRouter([
       {
         path: "vans/:id",
         element: <VanDetails />,
-        loader: vanDetailsLoader,
-        errorElement: <h1>van don't exists</h1>
+        loader: ({params}) => vanLoader({params}),
+        errorElement: <VansError />
       },
       {
         path: "host",
@@ -83,7 +91,7 @@ const router = createBrowserRouter([
           {
             path: "vans/:id",
             element: <HostVanDetails />,
-            loader: hostVanDetailsLoader,
+            loader: () => hostVanDetailsLoader,
             children: [
               {
                 index: true,

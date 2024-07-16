@@ -22,6 +22,9 @@ export default {
         'filter-normal': '#FFEAD0',
         'filter-text': '#4D4D4D',
         'rent-button': '#FF8C38',
+        'active-simple': '#E17654',
+        'active-luxury': '#161616',
+        'active-rugged': '#115e59',
       },
       backgroundImage: {
         'hero-image': "url('/background.png')",
