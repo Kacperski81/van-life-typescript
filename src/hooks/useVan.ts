@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
-import { errorType, vanType } from '../types'
+import { Error, Van } from '../types'
 import { getVans } from '../api'
 
 export function useVans() {
-    const [vans, setVans] = useState<vanType[] | null>(null)
+    const [vans, setVans] = useState<Van[] | null>(null)
     const [loading, setLoading] = useState<boolean>(false)
-    const [error, setError] = useState<errorType | null>(null)
+    const [error, setError] = useState<Error | null>(null)
 
 
     // useEffect(() => {
@@ -23,9 +23,9 @@ export function useVans() {
             try {
                 const data = await getVans()
                 setVans(data)
-            } catch (err: errorType | unknown) {
+            } catch (err: Error | unknown) {
                 console.log(err)
-                setError(err as errorType)
+                setError(err as Error)
             } finally {
                 setLoading(false)
             }

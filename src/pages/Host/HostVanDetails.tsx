@@ -1,11 +1,11 @@
 import { Link, NavLink, Outlet, useLoaderData } from "react-router-dom";
-import { vanType } from "../../types";
+import { Van } from "../../types";
 
-export type ContextType = { hostVan: vanType | null }
+export type ContextType = { hostVan: Van | null }
 
 export function HostVanDetails() {
    
-    const hostVan: vanType = useLoaderData() as vanType
+    const hostVan: Van = useLoaderData() as Van
 
     return (
         <div className="mt-8 px-4">

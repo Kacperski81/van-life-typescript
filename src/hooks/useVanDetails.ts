@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react"
-import { vanType } from "../types"
+import { Van } from "../types"
 
 export function useVanDetails(id: string) {
 
-    const [vanDetails, setVanDetails] = useState<vanType | null>(null)
+    const [vanDetails, setVanDetails] = useState<Van | null>(null)
     
     useEffect(() => {
         async function fetchVanDetails(id: string) {

@@ -1,7 +1,7 @@
 import { getUser } from "./api"
-import { userType, errorType } from "./types"
+import { userType, Error } from "./types"
 
-export async function loginAction(obj: {request: Request, params: object}): Promise<userType | errorType>{
+export async function loginAction(obj: {request: Request, params: object}): Promise<userType | Error>{
     const formData = await obj.request.formData()
     const email = formData.get("email") as string
     const password = formData.get("password") as string
@@ -22,7 +22,7 @@ export async function loginAction(obj: {request: Request, params: object}): Prom
     }
     catch (error) {
         console.log("Error: ", error)
-        return error as errorType 
+        return error as Error 
     }
 
 }

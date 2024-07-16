@@ -91,7 +91,7 @@ const router = createBrowserRouter([
           {
             path: "vans/:id",
             element: <HostVanDetails />,
-            loader: () => hostVanDetailsLoader,
+            loader: () => requireAuth(),
             children: [
               {
                 index: true,

@@ -1,8 +1,8 @@
 import { Link,useLoaderData } from "react-router-dom";
-import { vanType } from "../../types";
+import { Van } from "../../types";
 
 export function HostVans() {
-    const hostVans = useLoaderData() as vanType[]
+    const hostVans = useLoaderData() as Van[]
 
     // return (
     //     <h1>
