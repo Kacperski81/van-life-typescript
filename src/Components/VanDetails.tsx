@@ -42,11 +42,11 @@ export function VanDetails() {
     }
 
     return (
-        <div className="bg-background mx-auto">
+        <div className="bg-background">
 
-            <div className="px-4">
+            <div className="px-4 flex flex-col">
 
-                <p className="mb-4 border">
+                <p className="mb-4">
                     {/* <Link to="/vans"> */}
                     <Link to={search} >
 
@@ -55,7 +55,7 @@ export function VanDetails() {
                     </Link>
                 </p>
         
-                <Suspense fallback={<p>Loading ...</p>}>
+                <Suspense fallback={<div className="md:flex lg:w-[1000px] gap-6">Loading ...</div>}>
                     <Await resolve={van}>
                         {renderVan}
                     </Await>
