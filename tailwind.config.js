@@ -10,8 +10,8 @@ export default {
         sans: ['Inter', 'sans-serif'],
       },
       gridTemplateRows: {
-        'hidden-menu': '60px auto 50px',
-        'mobile-menu': '160px auto 50px',
+        'hidden-menu': '60px auto 40px',
+        'mobile-menu': '200px auto 50px',
         'tablet-menu': `auto auto 50px`,
       },
       colors: {

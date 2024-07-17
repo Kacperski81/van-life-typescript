@@ -73,7 +73,7 @@ export function Vans() {
 
             </div>
 
-            <Suspense fallback={<p>Loading...</p>}>
+            <Suspense fallback={<div className="mb-4 lg:max-w-[800px] mx-auto">Loading...</div>}>
                 <Await resolve={vans}>
 
                     {renderVans}

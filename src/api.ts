@@ -15,6 +15,7 @@ export async function getVan(id: string): Promise<Van | Error> {
 
 export async function getVans(): Promise<Van[]> {
     const url = '/api/vans'
+    // this sleep will also pasue the filter change action
     await sleep(2000)
     try {
         const response = await fetch(url)

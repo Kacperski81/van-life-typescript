@@ -15,7 +15,7 @@ export function Header({ navToggle, handleNavToggle }: HeaderProps) {
 
     return (
 
-        <header className={clsx("flex items-center justify-between flex-wrap w-full p-2")}>
+        <header className={clsx("text-xl md:text-base flex items-center justify-between flex-wrap w-full p-2")}>
 
             <div className={clsx("ml-4 flex-shrink-0")}>
 

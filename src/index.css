@@ -16,7 +16,7 @@ html {
 }
 
 body {
-  @apply max-w-[1440px] mx-auto px-4 md:px-0
+  @apply max-w-[1440px] mx-auto md:px-0
 }
 
 h2 {
