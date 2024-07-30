@@ -15,15 +15,19 @@ export function Header({ navToggle, handleNavToggle }: HeaderProps) {
 
     return (
 
-        <header className={clsx("text-xl md:text-base flex items-center justify-between flex-wrap w-full p-2")}>
+        <header 
+            // className={clsx("text-xl md:text-base flex items-center justify-between flex-wrap w-full p-2")}
+            className="flex items-center justify-between flex-wrap w-full p-2 bg-background md:bg-[#e9dbc0]"
+        >
 
             <div className={clsx("ml-4 flex-shrink-0")}>
 
                 <NavLink end to="/">
                     {/* <span className="text-[26px] leading-[40px] font-extrabold text-black">#VANLIFE</span> */}
                     {/* #VANLIFE */}
-                    <div className="w-28 md:w-52 shadow-lg">
-                        <img className="" src="/logo.png" alt="VanLife Logo" />
+                    <div className="w-[100px] md:w-[150px] flex items-center mb-3">
+                        <img className="" src="/logo-base.png" alt="VanLife Logo" />
+                        <img className="" src="/logo.png" alt="Text logo" />
                     </div>
                 </NavLink>
 
@@ -39,7 +43,7 @@ export function Header({ navToggle, handleNavToggle }: HeaderProps) {
             <div
                 className={clsx("w-full md:w-auto md:block")}
             >
-                <ul className="px-4 md:px-0 md:grid md:grid-cols-[70px_70px_70px_70px]">
+                <ul className="px-4 md:px-0 md:grid md:grid-cols-[70px_70px_70px_70px] text-lg">
 
                     <li className="md:flex md:justify-center">
                         <NavLink

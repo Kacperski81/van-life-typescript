@@ -1,3 +1,4 @@
+const textShadowValue = '7px 2px 7px rgba(110, 110, 110, 0.9)';
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -10,8 +11,8 @@ export default {
         sans: ['Inter', 'sans-serif'],
       },
       gridTemplateRows: {
-        'hidden-menu': '60px auto 40px',
-        'mobile-menu': '200px auto 50px',
+        'hidden-menu': '80px auto 40px',
+        'mobile-menu': '190px auto 50px',
         'tablet-menu': `auto auto 50px`,
       },
       colors: {
@@ -30,9 +31,24 @@ export default {
         'hero-image': "url('/background.png')",
         'about-image': "url('/hero-about.png')",
         'about-image-hd': "url('/hero-about-hd.png')",
+        'mapbg': "url('/vanbg11.png')"
+      },
+      boxShadow: {
+        '3xl': '10px 35px 60px 5px rgba(255, 255, 255, 0.3)',
+      },
+      textShadow: {
+        'default': textShadowValue,
       }
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      addUtilities({
+        '.text-shadow': {
+          textShadow: textShadowValue,
+        },
+      }, ['responsive']);
+    },
+  ],
 }
 

@@ -18,9 +18,9 @@ export function VanDetails() {
     function renderVan(van: Van) {
         const filterStyle = `var(--color-${van.type})`
         return (
-            <div className="md:flex lg:w-[1000px] gap-6">
+            <div className="md:flex lg:w-[1000px] gap-6 md:bg-[rgba(0,0,0,0.2)] md:p-4 md:text-shadow">
 
-                <div className="aspect-[1/1] w-full md:w-[50%] sm:mx-auto bg-white bg-cover bg-center">
+                <div className="aspect-[1/1] w-full md:w-[50%] sm:mx-auto bg-cover bg-center mb-4">
                     <img src={van.imageUrl} className="mx-auto" alt={van.name} />
                 </div>
 
@@ -32,9 +32,9 @@ export function VanDetails() {
                         {van.type.charAt(0).toUpperCase() + van.type.substring(1)}
                     </span>
 
-                    <h2>{van.name}</h2>
-                    <p className="my-2"><strong>${van.price}</strong>/day</p>
-                    <p className="text-justify my-2">{van.description}</p>
+                    <h2 className="md:text-white">{van.name}</h2>
+                    <p className="my-2 md:text-white"><strong>${van.price}</strong>/day</p>
+                    <p className="text-justify my-2 md:text-white">{van.description}</p>
                     <button className="bg-rent-button w-full my-4 py-2 font-bold text-[18px] text-white">Rent this van</button>
                 </div>
             </div>
@@ -42,7 +42,7 @@ export function VanDetails() {
     }
 
     return (
-        <div className="bg-background">
+        <div className="bg-background md:bg-[rgba(0,0,0,0.25)] md:mx-auto">
 
             <div className="px-4 flex flex-col">
 
@@ -50,7 +50,7 @@ export function VanDetails() {
                     {/* <Link to="/vans"> */}
                     <Link to={search} >
 
-                        ⬅️<span>Back to {filter} vans</span>
+                        ⬅️<span className="md:text-white text-shadow">Back to {filter} vans</span>
 
                     </Link>
                 </p>

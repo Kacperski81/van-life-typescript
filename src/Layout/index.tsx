@@ -19,11 +19,11 @@ export function Layout() {
     return (
         // <div className="grid grid-rows-layout font-sans max-w-screen-2xl mx-auto h-screen">
         <div
-            className={clsx("bg-background transition-[grid] grid grid-rows-hidden-menu font-sans text-sm max-w-screen-2xl mx-auto h-screen",
+            className={clsx("transition-[grid] grid grid-rows-hidden-menu md:flex md:flex-col font-sans text-sm max-w-screen-2xl mx-auto h-screen",
                 { "transition-[grid] grid grid-rows-mobile-menu": !navToggle })}
         >
             <Header navToggle={navToggle} handleNavToggle={handleNavToggle} />
-            <main className="flex bg-background">
+            <main className="flex md:grow bg-mapbg bg-cover bg-center">
                 <Outlet />
             </main>
             <Footer />

@@ -19,7 +19,7 @@ export function VanCard({ image, price, name, type, id, searchParams }: VanCardP
     const filterStyle = `var(--color-${type})`
     return (
         <div
-            className="border border-amber-100 shadow-sm rounded-lg overflow-hidden m-2 transition-all sm:hover:shadow-2xl sm:active:scale-95 p-2"
+            className="bg-background border border-amber-100 shadow-sm rounded-lg overflow-hidden m-2 transition-all sm:hover:shadow-3xl sm:active:scale-95 p-2"
             // className="max-w-[250px] md:min-w-[150px] mx-auto md:flex md:flex-row md:wrap border-2 rounded-xl border-amber-100 overflow-hidden shadow-sm transition-all sm:hover:shadow-2xl sm:active:scale-95"
         >
 

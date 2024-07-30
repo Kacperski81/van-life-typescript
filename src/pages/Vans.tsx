@@ -50,9 +50,9 @@ export function Vans() {
     }
 
     return (
-        <div className="grow px-4 bg-background mx-auto lg:px-3">
+        <div className="grow px-4 mx-auto max-w-[900px] lg:px-3">
 
-            <h2 className="mb-4 text-center">Explore our van options</h2>
+            <h2 className="m-4 text-center text-4xl text-white text-shadow">Explore our van options</h2>
 
             <div className="flex flex-row mb-4 lg:max-w-[800px] mx-auto">
 
@@ -66,7 +66,7 @@ export function Vans() {
 
                 {typeFilter ? (<button
                     onClick={() => setSearchParams({})}
-                    className="text-filter-color text-sm"
+                    className="text-filter-color text-sm md:text-white md:hover:text-black md:hover:bg-white md:text-shadow md:text-xl md:bg-[rgba(0,0,0,0.25)] p-2 rounded-lg ml-2 md:shadow-md    "
                 >
                     Clear filters
                 </button>) : ""}

@@ -12,11 +12,11 @@
 }
 
 html {
-  @apply bg-[#1C1C1C];
+  @apply bg-[#e9dbc0] bg-cover bg-center bg-no-repeat font-sans;
 }
 
 body {
-  @apply max-w-[1440px] mx-auto md:px-0
+  @apply max-w-[1440px] mx-auto md:px-0;
 }
 
 h2 {
@@ -24,7 +24,7 @@ h2 {
 }
 
 p {
-  @apply text-[#161616] font-medium text-base leading-5
+  @apply text-[#161616] font-medium text-base leading-7
 }
 
 .header-link {
