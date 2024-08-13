@@ -36,8 +36,8 @@ export function Login() {
     }
 
     return (
-        <div className="my-0 w-full max-w-[500px] mx-auto bg-background xl:bg-[transparent]">
-            <Form method="post" className="flex flex-col justify-center px-3 py-4 bg-red-500 rounded-full aspect-square">
+        <div className="my-0 w-full max-w-[500px] mx-auto bg-background xl:bg-[transparent] xl:flex xl:justify-center xl:items-center px-4">
+            <Form method="post" className="xl:grow flex flex-col justify-center px-3 py-4 bg-red-500 rounded-full aspect-square">
                 <h1 className="text-3xl font-bold text-center text-white mb-4">Sign in to your account</h1>
                 <h2 className="text-2xl text-white mb-3 text-center">{actionData && isErrorType(actionData) ? actionData.message : ""}</h2>
                 <input

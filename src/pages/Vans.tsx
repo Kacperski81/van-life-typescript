@@ -94,7 +94,7 @@ export function Vans() {
     }
 
     return (
-        <div className="p-4 mx-auto w-full lg:px-3 flex flex-col justify-start self-start">
+        <div className="mx-auto w-full lg:px-3 flex flex-col justify-start self-start">
 
             <h2 className="text-black text-4xl text-center font-extrabold md:text-[39px] md:leading-[38px] text-shadow mb-3 ">Explore our van options</h2>
 
