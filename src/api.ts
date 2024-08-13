@@ -1,5 +1,5 @@
 import { Van, credsType, credsInputType } from "./types"
-import { sleep } from "./utils"
+// import { sleep } from "./utils"
 
 export async function getVan(id: string): Promise<Van | Error> {
     const url = `/api/vans/${id}`
@@ -16,7 +16,7 @@ export async function getVan(id: string): Promise<Van | Error> {
 export async function getVans(): Promise<Van[]> {
     const url = '/api/vans'
     // this sleep will also pasue the filter change action
-    await sleep(2000)
+    // await sleep(2000)
     try {
         const response = await fetch(url)
         const data = await response.json()

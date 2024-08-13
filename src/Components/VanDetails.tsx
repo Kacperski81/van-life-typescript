@@ -9,7 +9,6 @@ interface LoaderData {
 export function VanDetails() {
 
     const { van } = useLoaderData() as LoaderData
-    console.log(van)
     const location = useLocation()
 
     const search = location.state?.search ? `/vans?${location.state.search}` : "/vans"
@@ -18,10 +17,10 @@ export function VanDetails() {
     function renderVan(van: Van) {
         const filterStyle = `var(--color-${van.type})`
         return (
-            <div className="md:flex lg:w-[1000px] gap-6 md:bg-[rgba(0,0,0,0.2)] md:p-4 md:text-shadow">
+            <div className="md:flex lg:w-[1000px] gap-6 md:p-4">
 
-                <div className="aspect-[1/1] w-full md:w-[50%] sm:mx-auto bg-cover bg-center mb-4">
-                    <img src={van.imageUrl} className="mx-auto" alt={van.name} />
+                <div className="aspect-square w-full md:w-[50%] sm:mx-auto bg-cover bg-center mb-4">
+                    <img src={van.imageUrl} className="mx-auto w-full rounded-lg" alt={van.name} />
                 </div>
 
                 <div className="md:mx-auto md:w-[55%] flex flex-col gap-2 justify-center">
@@ -32,9 +31,9 @@ export function VanDetails() {
                         {van.type.charAt(0).toUpperCase() + van.type.substring(1)}
                     </span>
 
-                    <h2 className="md:text-white">{van.name}</h2>
-                    <p className="my-2 md:text-white"><strong>${van.price}</strong>/day</p>
-                    <p className="text-justify my-2 md:text-white">{van.description}</p>
+                    <h2>{van.name}</h2>
+                    <p className="my-2"><strong>${van.price}</strong>/day</p>
+                    <p className="text-justify my-2">{van.description}</p>
                     <button className="bg-rent-button w-full my-4 py-2 font-bold text-[18px] text-white">Rent this van</button>
                 </div>
             </div>
@@ -42,20 +41,20 @@ export function VanDetails() {
     }
 
     return (
-        <div className="bg-background md:bg-[rgba(0,0,0,0.25)] md:mx-auto">
+        <div className="w-full md:mx-auto xl:flex xl:items-center xl:justify-center">
 
-            <div className="px-4 flex flex-col">
+            <div className="px-4 flex xl:border flex-col bg-background xl:shadow-lg xl:bg-[rgba(233,217,191,0.7)]">
 
                 <p className="mb-4">
                     {/* <Link to="/vans"> */}
                     <Link to={search} >
 
-                        ⬅️<span className="md:text-white text-shadow">Back to {filter} vans</span>
+                        ⬅️<span>Back to {filter} vans</span>
 
                     </Link>
                 </p>
         
-                <Suspense fallback={<div className="md:flex lg:w-[1000px] gap-6">Loading ...</div>}>
+                <Suspense fallback={<div className="w-full aspect-[16/9] xl:w-[1000px] xl:aspect-[16/9]">Loading ...</div>}>
                     <Await resolve={van}>
                         {renderVan}
                     </Await>

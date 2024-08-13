@@ -9,6 +9,9 @@
     --color-luxury: 22 22 22;
     --color-rugged: 17 94 89;
   }
+  * {
+    @apply box-border;
+  }
 }
 
 html {
@@ -20,7 +23,7 @@ body {
 }
 
 h2 {
-  @apply text-[28px] md:text-[32px] font-bold leading-[34px]
+  @apply text-[32px] font-bold leading-[34px]
 }
 
 p {
@@ -38,3 +41,8 @@ p {
 .header-link:hover {
   @apply text-[#161616] font-bold
 }
+
+.slider-button {
+  @apply block absolute top-0 bottom-0 text-2xl
+}
+

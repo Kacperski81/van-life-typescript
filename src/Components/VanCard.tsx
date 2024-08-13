@@ -7,9 +7,10 @@ interface VanCardProps {
     type: string
     id: string
     searchParams: URLSearchParams
+    cardIndex: number
 }
 
-export function VanCard({ image, price, name, type, id, searchParams }: VanCardProps) {
+export function VanCard({ image, price, name, type, id, searchParams, cardIndex }: VanCardProps) {
     // console.log(searchParams.toString())
     const filterTypeURL: string | null = searchParams.toString() || null
     const filterType: string | null = searchParams.get("type") || null
@@ -19,10 +20,11 @@ export function VanCard({ image, price, name, type, id, searchParams }: VanCardP
     const filterStyle = `var(--color-${type})`
     return (
         <div
-            className="bg-background border border-amber-100 shadow-sm rounded-lg overflow-hidden m-2 transition-all sm:hover:shadow-3xl sm:active:scale-95 p-2"
-            // className="max-w-[250px] md:min-w-[150px] mx-auto md:flex md:flex-row md:wrap border-2 rounded-xl border-amber-100 overflow-hidden shadow-sm transition-all sm:hover:shadow-2xl sm:active:scale-95"
-        >
+            // className="bg-background border border-amber-100 shadow-sm rounded-lg sm:active:scale-95 mx-auto sm:min-w-[48%] min-w-[200px] w-[200px] max-w-[200px] lg:max-w-[300px] grow xl:min-w-[380px] xl:w-[380px] p-2 transition-[translate] duration-1000 transition-transform hover:scale-105 "
+            className="bg-background mx-auto rounded-lg p-2 xl:min-w-[340px] lg:max-w-[340px] xl:aspect-[20/9] transition-all duration-500 hover:scale-105 sm:active:scale-95 bg-white"
+            style={{ translate: `${-100 * cardIndex}%`,}}
 
+        >
             <Link
                 to={id}
                 state={
@@ -31,14 +33,20 @@ export function VanCard({ image, price, name, type, id, searchParams }: VanCardP
                         search: filterTypeURL
                     }
                 }
-                aria-label={`View details for ${name} priced at $${price} per day`}>
-                <div className="">
+                aria-label={`View details for ${name} priced at $${price} per day`}
+                className=""
+            >
+                <div className="w-full relative">
 
-                    <div className="aspect-[4/4] w-full bg-white bg-cover bg-center">
-                        <img src={image} className="max-w-full mb-2" alt={`Image of ${name}`} />
+                    <div className="w-full aspect-square">
+                        <img
+                            src={image}
+                            className="w-full h-full object-cover block"
+                            alt={`Image of ${name}`}
+                        />
                     </div>
 
-                    <div className="flex flex-row wrap justify-between p-2">
+                    <div className="flex flex-row wrap justify-between  p-2">
                         <div>
                             <p className="text-[14px] font-bold">{name}</p>
                             <p className="mt-1 w-4/5 text-[12px] text-[#ffead0] text-center rounded-lg py-1 px-2" style={{ backgroundColor: `rgb(${filterStyle}` }}>{type.charAt(0).toUpperCase() + type.substring(1)}</p>

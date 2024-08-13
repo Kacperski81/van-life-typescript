@@ -36,25 +36,25 @@ export function Login() {
     }
 
     return (
-        <div className="my-0 w-full max-w-[500px] mx-auto bg-background">
-            <Form method="post" className="flex flex-col gap-3 px-4 py-4">
-                <h1 className="text-3xl font-bold">Sign in to your account</h1>
-                <h2 className="text-2xl text-red-500 text-center">{actionData && isErrorType(actionData) ? actionData.message : ""}</h2>
+        <div className="my-0 w-full max-w-[500px] mx-auto bg-background xl:bg-[transparent]">
+            <Form method="post" className="flex flex-col justify-center px-3 py-4 bg-red-500 rounded-full aspect-square">
+                <h1 className="text-3xl font-bold text-center text-white mb-4">Sign in to your account</h1>
+                <h2 className="text-2xl text-white mb-3 text-center">{actionData && isErrorType(actionData) ? actionData.message : ""}</h2>
                 <input
-                    className="p-2 rounded-lg"
+                    className="p-4 rounded-t-lg"
                     type="email"
                     name="email"
                     placeholder="Email address"
                 />
                 <input
-                    className="p-2 rounded-lg"
+                    className="p-4 rounded-b-lg"
                     type="password"
                     name="password"
                     placeholder="Password"
                     autoComplete="false"
                 />
                 <button
-                    className="border py-2 rounded-lg text-white bg-rent-button"
+                    className="w-[80%] max-w-[80%] mx-auto py-2 rounded-lg text-black bg-white hover:bg-black hover:text-white mt-4"
                     type="submit"
                 >
                     Log in

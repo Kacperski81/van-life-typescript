@@ -1,4 +1,4 @@
-const textShadowValue = '7px 2px 7px rgba(110, 110, 110, 0.9)';
+const textShadowValue = '1px 1px 1px rgba(110, 110, 110, 0.9)';
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -11,9 +11,9 @@ export default {
         sans: ['Inter', 'sans-serif'],
       },
       gridTemplateRows: {
-        'hidden-menu': '80px auto 40px',
-        'mobile-menu': '190px auto 50px',
-        'tablet-menu': `auto auto 50px`,
+        'hidden-menu': '80px auto 60px',
+        'mobile-menu': '190px auto 70px',
+        'tablet-menu': `auto auto 70px`,
       },
       colors: {
         'background': '#FFF7ED',

@@ -23,7 +23,7 @@ export function Layout() {
                 { "transition-[grid] grid grid-rows-mobile-menu": !navToggle })}
         >
             <Header navToggle={navToggle} handleNavToggle={handleNavToggle} />
-            <main className="flex md:grow bg-mapbg bg-cover bg-center">
+            <main className="flex grow bg-background xl:bg-[#e9dbc0] xl:bg-mapbg bg-contain bg-no-repeat bg-center">
                 <Outlet />
             </main>
             <Footer />
