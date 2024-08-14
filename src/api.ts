@@ -9,7 +9,7 @@ export async function getVan(id: string): Promise<Van | Error> {
         const data = await response.json()
         return data.vans
     } catch (error) {
-        return new Error("Failed to fetch van")
+        throw new Error("Failed to fetch van")
     }
 }
 
@@ -43,8 +43,9 @@ export async function getVans(): Promise<Van[]> {
 //     return data.vans
 // }
 
-export async function getHostVans(hostId: string, id?: number): Promise<Van[]> {
-    const url = id ? `/api/host/vans/${id}` : '/api/host/vans'
+// export async function getHostVans(hostId: string, id?: number): Promise<Van[]> {
+export async function getHostVans(hostId: string): Promise<Van[]> {
+    const url = '/api/host/vans'
     const headers = {
         "Content-Type": "application/json",
         ...(hostId && { "HostId": hostId })
@@ -58,6 +59,20 @@ export async function getHostVans(hostId: string, id?: number): Promise<Van[]> {
     return data.vans
 }
 
+export async function getHostVan(hostId: string, id: string): Promise<Van> {
+    const url = `/api/host/vans/${id}`
+    const headers = {
+        "Content-Type": "application/json",
+        ...(hostId && { "HostId": hostId })
+    }
+    const res = await fetch(url, { headers })
+    if (!res.ok) {
+        throw new Error("Failed to fetch host van")
+    }
+    const data = await res.json()
+    return data.vans
+}
+
 export async function getUser(creds: credsInputType): Promise<credsType> {
     const res = await fetch('/api/login', {
         method: "post",
@@ -66,7 +81,7 @@ export async function getUser(creds: credsInputType): Promise<credsType> {
     const data = await res.json()
 
     if (!res.ok) {
-        console.log(data)
+        // console.log(data)
         throw {
             message: data.message
         }

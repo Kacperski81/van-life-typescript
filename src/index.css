@@ -46,3 +46,11 @@ p {
   @apply block absolute top-0 bottom-0 text-2xl
 }
 
+.host-links {
+  @apply px-1 text-[#4D4D4D] text-base sm:text-lg
+}
+
+.host-links-active {
+  @apply text-[#161616] text-base sm:text-lg underline font-bold px-1
+}
+

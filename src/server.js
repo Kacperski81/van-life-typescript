@@ -42,13 +42,13 @@ createServer({
         })
 
         this.get("/host/vans", (schema, request) => {
-            console.log(request)
             return schema.vans.where({ hostId: request.requestHeaders.HostId })
         })
 
         this.get("/host/vans/:id", (schema, request) => {
             const id = request.params.id
-            return schema.vans.findBy({ id, hostId: "123" })
+            const hostId = request.requestHeaders.HostId
+            return schema.vans.findBy({ id, hostId })
         })
 
         this.post("/login", (schema, request) => {

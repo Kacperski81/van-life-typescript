@@ -12,7 +12,7 @@ export default {
       },
       gridTemplateRows: {
         'hidden-menu': '80px auto 60px',
-        'mobile-menu': '190px auto 70px',
+        'mobile-menu': '190px auto 60px',
         'tablet-menu': `auto auto 70px`,
       },
       colors: {

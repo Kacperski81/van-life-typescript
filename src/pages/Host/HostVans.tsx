@@ -6,6 +6,7 @@ export function HostVans() {
     const { hostVans } = useLoaderData() as { hostVans: Van[] }
 
     function renderHostVans(vans: Van[]) {
+        console.log(vans)
         return (
             <div>
                 {vans.map((van) => {

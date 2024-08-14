@@ -18,7 +18,8 @@ import { VansError } from "./Components/VansError";
 import { 
   vansLoader, 
   vanLoader, 
-  hostVansLoader } from "./loaders";
+  hostVansLoader,
+  hostVanLoader } from "./loaders";
 import { Login } from "./Components/Login";
 import { loginAction } from "./actions";
 import { requireAuth } from "./utils";
@@ -69,7 +70,7 @@ const router = createBrowserRouter([
           {
             index: true,
             element: <Dashboard />,
-            loader: () => requireAuth()
+            loader: hostVansLoader,
           },
           {
             path: "income",
@@ -91,7 +92,7 @@ const router = createBrowserRouter([
           {
             path: "vans/:id",
             element: <HostVanDetails />,
-            loader: () => requireAuth(),
+            loader: hostVanLoader,
             children: [
               {
                 index: true,
