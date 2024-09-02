@@ -1,9 +1,17 @@
-import { Van, credsType, credsInputType } from "./types"
-// import { sleep } from "./utils"
+import { Van, InputType, } from "./types"
+import { sleep } from "./utils"
+
+type Creds = {
+    user: {
+        name: string,
+        id: string, 
+        email: string
+    }
+}
 
 export async function getVan(id: string): Promise<Van | Error> {
     const url = `/api/vans/${id}`
-    // await sleep(2000)
+    // await sleep(3000)
     try {
         const response = await fetch(url)
         const data = await response.json()
@@ -16,10 +24,11 @@ export async function getVan(id: string): Promise<Van | Error> {
 export async function getVans(): Promise<Van[]> {
     const url = '/api/vans'
     // this sleep will also pasue the filter change action
-    // await sleep(2000)
+    // await sleep(1000)
     try {
         const response = await fetch(url)
         const data = await response.json()
+        // console.log(data)
         return data.vans
     }
     catch (error) {
@@ -45,17 +54,17 @@ export async function getVans(): Promise<Van[]> {
 
 // export async function getHostVans(hostId: string, id?: number): Promise<Van[]> {
 export async function getHostVans(hostId: string): Promise<Van[]> {
+    // await sleep(3000)
     const url = '/api/host/vans'
     const headers = {
         "Content-Type": "application/json",
         ...(hostId && { "HostId": hostId })
     }
     const res = await fetch(url, { headers })
+    const data = await res.json()
     if (!res.ok) {
         throw new Error("Failed to fetch host vans")
     }
-    const data = await res.json()
-
     return data.vans
 }
 
@@ -73,12 +82,13 @@ export async function getHostVan(hostId: string, id: string): Promise<Van> {
     return data.vans
 }
 
-export async function getUser(creds: credsInputType): Promise<credsType> {
+export async function getUser(creds: InputType): Promise<Creds> {
     const res = await fetch('/api/login', {
         method: "post",
         body: JSON.stringify(creds),
     })
     const data = await res.json()
+    console.log(data)
 
     if (!res.ok) {
         // console.log(data)
@@ -86,6 +96,32 @@ export async function getUser(creds: credsInputType): Promise<credsType> {
             message: data.message
         }
     }
-    console.log(data)
     return data
+}
+
+export async function getTransactions(hostId: string) {
+    await sleep(2000)
+    const url = '/api/transactions'
+    const headers = {
+        "Content-Type": "application/json",
+        ...(hostId && { "HostId": hostId })
+    }
+    const res = await fetch(url, { headers })
+    if (!res.ok) {
+        throw new Error("Failed to fetch transactions")
+    }
+    const data = await res.json()
+    console.log("data", data)
+    return data.transactions.transactionsData
+}
+
+export async function getReviews() {
+    await sleep(1000)
+    const url = '/api/reviews'
+    const res = await fetch(url)
+    if (!res.ok) {
+        throw new Error("Failed to fetch reviews")
+    }
+    const data = await res.json()
+    return data.reviews
 }

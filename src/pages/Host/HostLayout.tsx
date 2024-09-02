@@ -1,16 +1,13 @@
-import { Outlet, NavLink } from "react-router-dom";
-
+import { Outlet } from "react-router-dom";
+import HostHeader from "../../Components/Host/HostHeader";
+// xl:bg-[rgba(233,217,191,0.7)]
 export function HostLayout() {
-    
-    return (
-        <div className="grow bg-background">
-            <nav className="max-w-[350px] sm:max-w-[500px] grid grid-cols-4 py-8 px-2">
-                <NavLink end to="." className={({isActive}) => isActive ? "host-links-active" : "host-links"}>Dashboard</NavLink>
-                <NavLink to="income" className={({isActive}) => isActive ? "host-links-active text-right" : "host-links text-right"}>Income</NavLink>
-                <NavLink to="vans" className={({isActive}) => isActive ? "host-links-active text-center" : "host-links text-center"}>Vans</NavLink>
-                <NavLink to="reviews" className={({isActive}) => isActive ? "host-links-active text-center" : "host-links text-center"}>Reviews</NavLink>
-            </nav>
-            <Outlet />
-        </div>
-    )
+  return (
+    <div className="mx-auto max-w-[500px] bg-background xl:flex xl:min-w-[1100px] xl:items-start xl:self-start xl:bg-background-large xl:shadow-[0px_20px_20px_20px_rgba(0,0,0,0.2)]">
+      <HostHeader />
+      <main className="aspect-[16/9] w-full">
+          <Outlet />
+      </main>
+    </div>
+  );
 }

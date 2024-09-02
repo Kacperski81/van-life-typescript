@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer base {
   :root {
     --color-simple: 255 118 84;
@@ -19,38 +18,57 @@ html {
 }
 
 body {
-  @apply max-w-[1440px] mx-auto md:px-0;
+  @apply mx-auto max-w-[1440px] md:px-0;
 }
 
 h2 {
-  @apply text-[32px] font-bold leading-[34px]
+  @apply text-[32px] font-bold leading-[34px];
 }
 
 p {
-  @apply text-[#161616] font-medium text-base leading-7
+  @apply text-base font-medium leading-7 text-[#161616] lg:text-lg lg:font-bold lg:text-black;
 }
 
 .header-link {
-  @apply no-underline text-[#4D4D4D] 
+  @apply text-[#4D4D4D] no-underline;
 }
 
 .header-link-active {
-  @apply underline font-bold text-[#161616]
+  @apply font-bold text-[#161616] underline;
 }
 
 .header-link:hover {
-  @apply text-[#161616] font-bold
+  @apply font-bold text-[#161616];
 }
 
 .slider-button {
-  @apply block absolute top-0 bottom-0 text-2xl
+  @apply absolute bottom-0 top-0 block text-2xl;
 }
 
 .host-links {
-  @apply px-1 text-[#4D4D4D] text-base sm:text-lg
+  @apply px-1 text-base text-[#4D4D4D] sm:text-lg xl:text-left;
 }
 
 .host-links-active {
-  @apply text-[#161616] text-base sm:text-lg underline font-bold px-1
+  @apply px-1 text-base font-bold text-[#161616] underline sm:text-lg xl:text-left;
 }
 
+.slider-arrow {
+  @apply rounded-full bg-blue-500 text-4xl text-white hover:bg-green-500;
+}
+
+.slider-no-turn-arrow {
+  @apply rounded-full border border-white bg-white text-4xl text-red-500;
+}
+
+@font-face {
+  font-family: 'Geist Sans';
+  src: url('src/assets/fonts/GeistVF.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 100 900;
+}
+
+.chart-container {
+  min-width: 300px;
+  min-height: 300px;
+}

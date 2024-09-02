@@ -11,7 +11,7 @@ export function HostVans() {
             <div>
                 {vans.map((van) => {
                     return (
-                        <Link to={`/host/vans/${van.id}`} key={van.id}>
+                    <Link to={`/host/vans/${van.id}`} key={van.id}>
                             <div className="flex flex-row bg-white gap-2 mb-4 rounded-lg p-3">
                                 <div className=" w-[80px] rounded-lg ">
                                     <img src={van.imageUrl} className="" />

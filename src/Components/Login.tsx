@@ -1,65 +1,94 @@
-import { useEffect, useRef } from "react"
-import { Form, useNavigate, useActionData, useLocation } from "react-router-dom"
-import { Error, userType } from "../types"
-import { useUser } from "../UserContext"
-// import { LoggedIn } from "./LoggedIn"
+import { useEffect, useRef } from "react";
+import {
+  Form,
+  useNavigate,
+  useActionData,
+  useLocation,
+  useNavigation,
+} from "react-router-dom";
 
+import { Error, Transaction } from "../types";
+import { loginUser } from "../reducer/reducer";
+import { useUser } from "../UserContext";
+type ActionData = {
+  user: {
+    userName: string;
+    email: string;
+    userId: string;
+    isLoggedIn: boolean;
+  };
+  transactions: Transaction[];
+};
 
 export function Login() {
+  //data form actions
+  const actionData = useActionData() as ActionData;
+  // console.log("Action data: " , actionData);
+  const { dispatch } = useUser();
+  // console.log(user);
+  // useNavigate for redirecting
+  const navigate = useNavigate();
+  // useNavigation for getting state of the router
+  const navigation = useNavigation();
 
-    //use context
-    const { isLoggedIn, setUser } = useUser()
-    
-    const navigate = useNavigate()
-    const location = useLocation()
-    const actionData = useActionData() as userType | Error
-    const memoUrl = useRef(location.state ? location.state : "/host")
-    
-    
-    useEffect(() => {
-        
-        if (typeof actionData === "object" && "userName" in actionData && !isLoggedIn) {
-            setUser(() => ({
-                userName: actionData.userName,
-                email: actionData.email,
-                userId: actionData.userId,
-                isLoggedIn: true,
-            }));
-            localStorage.setItem('vanLife', JSON.stringify(actionData));
-            navigate(memoUrl.current);
-        }
-        
-    }, [actionData, setUser, isLoggedIn, navigate]);
-    
-    function isErrorType(data: userType | Error): data is Error {
-        return (data as Error).message !== undefined;
+  // console.log({navigation})
+  // useLoaction for getting where to redirect the user (to whre he is comming from)
+  const location = useLocation();
+  // useActionData for getting data
+  const memoUrl = useRef(location.state ? location.state : "/host");
+
+  useEffect(() => {
+    if (typeof actionData === "object" && "userName" in actionData.user) {
+      console.log("bac");
+      console.log(actionData);
+      const loggedUser = {
+        userName: actionData.user.userName,
+        email: actionData.user.email,
+        userId: actionData.user.userId,
+        isLoggedIn: true,
+      };
+      const userTransactions = actionData.transactions || [];
+      dispatch(loginUser(loggedUser, userTransactions));
+      navigate(memoUrl.current);
     }
+  }, [actionData, navigate, dispatch]);
 
-    return (
-        <div className="my-0 w-full max-w-[500px] mx-auto bg-background xl:bg-[transparent] xl:flex xl:justify-center xl:items-center px-4">
-            <Form method="post" className="xl:grow flex flex-col justify-center px-3 py-4 bg-red-500 rounded-full aspect-square">
-                <h1 className="text-2xl font-bold text-center text-white mb-4">Sign in to your account</h1>
-                <h2 className="text-xl text-white mb-3 text-center">{actionData && isErrorType(actionData) ? actionData.message : ""}</h2>
-                <input
-                    className="p-4 rounded-t-lg"
-                    type="email"
-                    name="email"
-                    placeholder="Email address"
-                />
-                <input
-                    className="p-4 rounded-b-lg"
-                    type="password"
-                    name="password"
-                    placeholder="Password"
-                    autoComplete="false"
-                />
-                <button
-                    className="w-[80%] max-w-[80%] mx-auto py-2 rounded-lg text-black bg-white hover:bg-black hover:text-white mt-4"
-                    type="submit"
-                >
-                    Log in
-                </button>
-            </Form>
-        </div>
-    )
+  function isErrorType(data: ActionData | Error): data is Error {
+    return (data as Error).message !== undefined;
+  }
+
+  return (
+    <div className="mx-auto my-0 w-full max-w-[500px] bg-background px-4 xl:flex xl:items-center xl:justify-center xl:bg-[transparent]">
+      <Form
+        method="post"
+        className="flex aspect-square flex-col justify-center rounded-full border border-4 border-white bg-red-500 px-3 py-4 shadow-xl xl:grow"
+      >
+        <h1 className="mb-4 text-center text-2xl font-bold text-white">
+          Sign in to your account
+        </h1>
+        <h2 className="mb-3 text-center text-xl text-white">
+          {actionData && isErrorType(actionData) ? actionData.message : ""}
+        </h2>
+        <input
+          className="rounded-t-lg p-4"
+          type="email"
+          name="email"
+          placeholder="Email address"
+        />
+        <input
+          className="rounded-b-lg p-4"
+          type="password"
+          name="password"
+          placeholder="Password"
+          autoComplete="false"
+        />
+        <button
+          className="mx-auto mt-4 w-[80%] max-w-[80%] rounded-lg bg-white py-2 text-black hover:bg-black hover:text-white"
+          type="submit"
+        >
+          {navigation.state !== "idle" ? "Loading..." : "Login"}
+        </button>
+      </Form>
+    </div>
+  );
 }

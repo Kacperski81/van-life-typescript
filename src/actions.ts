@@ -1,7 +1,7 @@
-import { getUser } from "./api"
-import { userType, Error } from "./types"
+import { getUser, getTransactions } from "./api"
+import { UserState, Error } from "./types"
 
-export async function loginAction(obj: {request: Request, params: object}): Promise<userType | Error>{
+export async function loginAction(obj: {request: Request, params: object}): Promise<UserState | Error>{
     const formData = await obj.request.formData()
     const email = formData.get("email") as string
     const password = formData.get("password") as string
@@ -11,13 +11,26 @@ export async function loginAction(obj: {request: Request, params: object}): Prom
     // console.log(pathname)
     try {
         const user = await getUser(creds)
-        console.log(user)
+        // console.log("User: ", user)
+        const transactions = await getTransactions(user.user.id)
+        console.log("Transactions: ", transactions)
+        // const vans = await getHostVans(user.user.id)
         // localStorage.setItem('isLoggedIn', 'true')
         return {
-            userName: user.user.name,
-            email: user.user.email,
-            userId: user.user.id,
-            isLoggedIn: true
+            // userName: user.user.name,
+            // email: user.user.email,
+            // userId: user.user.id,
+            // isLoggedIn: true,
+            incomeDays: 0,
+            user: {
+                userName: user.user.name,
+                email: user.user.email,
+                userId: user.user.id,
+                isLoggedIn: true,
+            },
+            transactions: transactions,
+            // vans: vans,
+            dispatch: () => {}
         } 
     }
     catch (error) {

@@ -1,13 +1,5 @@
-// UserContext.ts
 import { createContext } from "./create-context";
-import { Dispatch, SetStateAction } from "react";
-import { userType } from "./types";
-
-type UserState = {
-    userName: string;
-    isLoggedIn: boolean;
-    setUser: Dispatch<SetStateAction<userType>>;
-}
+import { UserState } from "./types";
 
 const [useUser, UserProvider] = createContext<UserState>();
 

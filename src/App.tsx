@@ -1,12 +1,12 @@
-import { RouterProvider, createBrowserRouter} from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Layout } from "./Layout";
 import { Home } from "./pages/Home";
 import { About } from "./pages/About";
 import { Vans } from "./pages/Vans";
 import { HostLayout } from "./pages/Host/HostLayout";
 import { VanDetails } from "./Components/VanDetails";
-import { Dashboard } from "./pages/Host/Dashboard";
-import { Income } from "./pages/Host/Income";
+import { Dashboard, loader as dashboardLoader } from "./pages/Host/Dashboard";
+import { Income, loader as incomeLoader } from "./pages/Host/Income";
 import { Reviews } from "./pages/Host/Reviews";
 import { HostVans } from "./pages/Host/HostVans";
 import { HostVanDetails } from "./pages/Host/HostVanDetails";
@@ -15,17 +15,20 @@ import { HostVanPrice } from "./pages/Host/HostVanPrice";
 import { HostVanPhoto } from "./pages/Host/HostVanPhoto";
 import { Error } from "./Components/Error";
 import { VansError } from "./Components/VansError";
-import { 
-  vansLoader, 
-  vanLoader, 
+import {
+  vansLoader,
+  vanLoader,
   hostVansLoader,
-  hostVanLoader } from "./loaders";
+  hostVanLoader,
+  reviewsLoader,
+  // dashboardLoader,
+} from "./loaders";
 import { Login } from "./Components/Login";
 import { loginAction } from "./actions";
 import { requireAuth } from "./utils";
 // import { getVans } from "./api";
 
-import "./server"
+import "./server";
 
 const router = createBrowserRouter([
   {
@@ -34,93 +37,87 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home />
+        element: <Home />,
       },
       {
         path: "about",
-        element: <About />
+        element: <About />,
       },
       {
         path: "vans",
         element: <Vans />,
         loader: vansLoader,
-        // loader: async () => {
-        //   return getVans()
-        // },
-        errorElement: <Error />
+        errorElement: <Error />,
       },
       {
         path: "login",
         element: <Login />,
         action: loginAction,
-        
       },
       {
         path: "vans/:id",
         element: <VanDetails />,
-        loader: ({params}) => vanLoader({params}),
-        errorElement: <VansError />
+        loader: ({ params }) => vanLoader({ params }),
+        errorElement: <VansError />,
       },
       {
         path: "host",
         element: <HostLayout />,
-        loader: () => requireAuth(),
+        // loader: () => requireAuth(),
         errorElement: <Error />,
         children: [
           {
             index: true,
             element: <Dashboard />,
-            loader: hostVansLoader,
+            // loader: dashboardLoader,
           },
           {
             path: "income",
             element: <Income />,
-            loader: () => requireAuth(),
+            // loader: incomeLoader,
+            // loader: () => requireAuth(),
           },
           // localhost:5173/host/income
           {
             path: "reviews",
             element: <Reviews />,
-            loader: () => requireAuth(),
+            // loader: reviewsLoader,
           },
           {
             path: "vans",
             element: <HostVans />,
-            loader: hostVansLoader,
+            // loader: hostVansLoader,
             errorElement: <Error />,
           },
           {
             path: "vans/:id",
             element: <HostVanDetails />,
-            loader: hostVanLoader,
+            // loader: hostVanLoader,
             children: [
               {
                 index: true,
-                element: <HostVanInfo />
+                element: <HostVanInfo />,
               },
               {
                 path: "pricing",
-                element: <HostVanPrice />
+                element: <HostVanPrice />,
               },
               {
                 path: "photos",
-                element: <HostVanPhoto />
-              }
-            ]
+                element: <HostVanPhoto />,
+              },
+            ],
           },
-        ]
+        ],
       },
       {
         path: "*",
-        element: <h2>Not Found</h2>
-      }
-    ]
-  }
-]
-)
+        element: <h2>Not Found</h2>,
+      },
+    ],
+  },
+]);
 
 export function App() {
-  return (
-    <RouterProvider router={router} />
-  )
+  return <RouterProvider router={router} />;
 }
