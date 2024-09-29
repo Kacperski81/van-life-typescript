@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useUser } from "../UserContext";
 import IconHamburgerMenu from "./IconHamburgerMenu";
@@ -13,14 +12,6 @@ type HeaderProps = {
 export function Header({ navToggle, handleNavToggle }: HeaderProps) {
   const navigate = useNavigate();
   const {state: {user}, dispatch }  = useUser();
-  const [windowSize, setWindowSize] = useState(document.body.clientWidth)
-  useEffect(() => {
-    function handleResize() {
-      setWindowSize(document.body.clientWidth)
-    } 
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  },[windowSize])
   return (
     <header className="flex w-full flex-wrap items-center justify-between bg-background p-2 lg:bg-[#e9dbc0]">
       <div className="ml-4 flex-shrink-0">
@@ -30,7 +21,6 @@ export function Header({ navToggle, handleNavToggle }: HeaderProps) {
           <div className="mb-3 flex w-[100px] items-center lg:w-[120px]">
             <img className="" src="/logo-base.png" alt="VanLife Logo" />
             <img className="" src="/logo.png" alt="Text logo" />
-            <p className="">{windowSize}</p>
           </div>
         </NavLink>
       </div>

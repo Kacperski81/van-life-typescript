@@ -2,6 +2,7 @@ import { DonutChartHero } from "../../Components/Charts/DountChartHero";
 import StackedBarChart from "../../Components/StackedBarChart";
 import { changeIncomeDays } from "../../reducer/reducer";
 import { useUser } from "../../UserContext";
+import { stringToDate } from "../../utils";
 
 export function Income() {
   const {
@@ -45,6 +46,19 @@ export function Income() {
       <div className="flex flex-col lg:flex-row">
         <StackedBarChart transactions={filteredTransactions} />
         <DonutChartHero transactions={filteredTransactions} />
+      </div>
+      <div>
+        <h3 className="text-xl font-bold mb-3">Your transactions ({filteredTransactions.length})</h3>
+        <div className="flex flex-col gap-2 rounded-lg custom-scrollbar md:h-[320px] md:w-[550px] md:overflow-y-auto md:px-2">
+          {filteredTransactions.map((transaction) => {
+            const date = stringToDate(transaction.date).toLocaleDateString();
+            return (
+            <div key={transaction.id} className="p-3 bg-white flex justify-between items-center">
+               <h2>£{transaction.total}</h2>
+               <p>{date}</p> 
+            </div>
+          )})}
+        </div>
       </div>
     </section>
   );

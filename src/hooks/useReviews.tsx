@@ -1,13 +1,10 @@
-
+import { stringToDate } from "../utils";
 import { useUser } from "../UserContext";
 export function useReviews() {
   const {
     state: { dashboardDays,reviewsDays, reviews, transactions}, dispatch
   } = useUser();
-  function stringToDate(dateString: string) {
-    const [day, month] = dateString.split("/").map(Number);
-    return new Date(2024, month - 1, day);
-  }
+
   const filteredReviews2 = reviews.filter((review) => {
     const firstDay = transactions.slice(transactions.length - dashboardDays)[0].date;
 

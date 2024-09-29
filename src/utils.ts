@@ -5,10 +5,17 @@ export async function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+export function stringToDate(dateString: string) {
+  const [day, month] = dateString.split("/").map(Number);
+  return new Date(2024, month - 1, day);
+}
+
 export async function requireAuth() {
-  const isLoggedIn = JSON.parse(sessionStorage.getItem("isLoggedIn") || "false");
+  const isLoggedIn = JSON.parse(
+    sessionStorage.getItem("isLoggedIn") || "false",
+  );
   // console.log(str)
-  console.log({isLoggedIn});
+  console.log({ isLoggedIn });
   if (!isLoggedIn) {
     throw {
       redirect: "/login",
