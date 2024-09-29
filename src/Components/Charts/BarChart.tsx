@@ -26,17 +26,6 @@ import {
 import { useOnWindowResize } from "../../hooks/useOnWindowResize";
 import { cx } from "../../lib/utils";
 
-//#region Shape
-// const customLegendPayload: {
-//   value: string;
-//   type: LegendType;
-//   color: string;
-// }[] = [
-//   { value: "The Cruiser", type: "square", color: "#161616" },
-//   { value: "Green Wonder", type: "square", color: "#115e59" },
-//   { value: "Modest Explorer", type: "square", color: "#E17654" },
-// ];
-
 function deepEqual<T>(obj1: T, obj2: T): boolean {
   if (obj1 === obj2) return true;
 

@@ -2,22 +2,13 @@
 import { cx } from "../lib/utils";
 import { Transaction } from "../types";
 import { BarChart, TooltipProps } from "./Charts/BarChart";
-import { useUser } from "../UserContext";
-// import { Legend } from "recharts";
-// import { BarChart3 } from "./Charts/BarChart3";
-// import { DonutChartHero } from "./Charts/DountChartHero";
-// import { BarChart3 } from "./Charts/BarChart3";
-// import SingleVanChart from "./Charts/SingleVanChart";
-// import { DonutChart } from "./Charts/DonutChart";
-// import { BarChart } from "recharts";
-
 const valueFormatter = (number: number) => {
   return Intl.NumberFormat("uk").format(number).toString();
 };
 
 export const Tooltip = ({ payload, active, label }: TooltipProps) => {
   if (!active || !payload || payload.length === 0) return null;
-  console.log({payload})
+  console.log({ payload });
   const data = payload.map((item) => ({
     total: item.payload.total,
     type: item.category,
@@ -60,11 +51,6 @@ export const Tooltip = ({ payload, active, label }: TooltipProps) => {
               },
             )}
           >
-            {/* <span
-              className={cx("size-2.5 shrink-0 rounded-sm")}
-              aria-hidden={true}
-            /> */}
-
             <div className="flex w-full justify-between">
               <span className="">
                 {item.type === "luxury"
@@ -92,10 +78,6 @@ export default function StackedBarChart({
 }: {
   transactions: Transaction[];
 }) {
-  //   const [vanTypeFilter, setVanTypeFilter] = useState<VanTypeFilter>("all");
-  const {
-    state: { vanType },
-  } = useUser();
 
   const dataToChart2 = transactions.map((transaction) => {
     return {
@@ -104,50 +86,28 @@ export default function StackedBarChart({
       luxury: transaction.luxury.price,
       rugged: transaction.rugged.price,
       simple: transaction.simple.price,
-    }
-  })
+    };
+  });
   return (
     <div className="min-w-[300px] max-w-[800px] md:w-[500px] lg:w-[600px]">
-      {vanType === "allVans" ? (
-        <>
-          <div className="h-64 w-full lg:h-[300px] lg:w-[500px]">
-            <BarChart
-              className="h-64"
-              data={dataToChart2}
-              index="date"
-              categories={["luxury", "rugged", "simple"]}
-              type="stacked"
-              colors={["luxury", "rugged", "simple"]}
-              valueFormatter={valueFormatter}
-              yAxisWidth={35}
-              maxValue={240}
-              showLegend={true}
-              customTooltip={Tooltip}
-              legendPosition="right"
-            >
-            </BarChart>
-          </div>
-          {/* <div className="h-64 w-full lg:h-[350px] lg:w-[600px]">
-            <BarChart
-              className="h-80 sm:hidden"
-              data={transactions}
-              index="date"
-              categories={["luxury", "rugged", "simple"]}
-              type="stacked"
-              colors={["luxury", "rugged", "simple"]}
-              valueFormatter={valueFormatter}
-              showYAxis={false}
-              showLegend={false}
-              startEndOnly={true}
-              customTooltip={Tooltip}
-            />
-          </div> */}
-        </>
-      ) : (
-        // <BarChart3 />
-        // <SingleVanChart />
-        <h2>Abc</h2>
-      )}
+      <>
+        <div className="h-64 w-full lg:h-[300px] lg:w-[500px]">
+          <BarChart
+            className="h-64"
+            data={dataToChart2}
+            index="date"
+            categories={["luxury", "rugged", "simple"]}
+            type="stacked"
+            colors={["luxury", "rugged", "simple"]}
+            valueFormatter={valueFormatter}
+            yAxisWidth={35}
+            maxValue={240}
+            showLegend={true}
+            customTooltip={Tooltip}
+            legendPosition="right"
+          />
+        </div>
+      </>
     </div>
   );
 }
