@@ -5,8 +5,8 @@ import { About } from "./pages/About";
 import { Vans } from "./pages/Vans";
 import { HostLayout } from "./pages/Host/HostLayout";
 import { VanDetails } from "./Components/VanDetails";
-import { Dashboard, loader as dashboardLoader } from "./pages/Host/Dashboard";
-import { Income, loader as incomeLoader } from "./pages/Host/Income";
+import { Dashboard } from "./pages/Host/Dashboard";
+import { Income } from "./pages/Host/Income";
 import { Reviews } from "./pages/Host/Reviews";
 import { HostVans } from "./pages/Host/HostVans";
 import { HostVanDetails } from "./pages/Host/HostVanDetails";
@@ -15,18 +15,10 @@ import { HostVanPrice } from "./pages/Host/HostVanPrice";
 import { HostVanPhoto } from "./pages/Host/HostVanPhoto";
 import { Error } from "./Components/Error";
 import { VansError } from "./Components/VansError";
-import {
-  vansLoader,
-  vanLoader,
-  hostVansLoader,
-  hostVanLoader,
-  reviewsLoader,
-  // dashboardLoader,
-} from "./loaders";
+import { vansLoader, vanLoader } from "./loaders";
 import { Login } from "./Components/Login";
 import { loginAction } from "./actions";
 import { requireAuth } from "./utils";
-// import { getVans } from "./api";
 
 import "./server";
 
@@ -53,6 +45,7 @@ const router = createBrowserRouter([
         path: "login",
         element: <Login />,
         action: loginAction,
+        errorElement: <div>error</div>,
       },
       {
         path: "vans/:id",
@@ -63,36 +56,29 @@ const router = createBrowserRouter([
       {
         path: "host",
         element: <HostLayout />,
-        // loader: () => requireAuth(),
+        loader: () => requireAuth(),
         errorElement: <Error />,
         children: [
           {
             index: true,
             element: <Dashboard />,
-            // loader: dashboardLoader,
           },
           {
             path: "income",
             element: <Income />,
-            // loader: incomeLoader,
-            // loader: () => requireAuth(),
           },
-          // localhost:5173/host/income
           {
             path: "reviews",
             element: <Reviews />,
-            // loader: reviewsLoader,
           },
           {
             path: "vans",
             element: <HostVans />,
-            // loader: hostVansLoader,
             errorElement: <Error />,
           },
           {
             path: "vans/:id",
             element: <HostVanDetails />,
-            // loader: hostVanLoader,
             children: [
               {
                 index: true,

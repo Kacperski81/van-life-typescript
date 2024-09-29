@@ -1,10 +1,11 @@
-import { getUser, getTransactions } from "./api"
-import { UserState, Error } from "./types"
+import { getUser, getTransactions, getHostVans, getReviews } from "./api"
+import { Error } from "./types"
 
-export async function loginAction(obj: {request: Request, params: object}): Promise<UserState | Error>{
-    const formData = await obj.request.formData()
-    const email = formData.get("email") as string
-    const password = formData.get("password") as string
+// export async function loginAction(obj: {request: Request, params: object}): Promise<UserState | Error>{
+export async function loginAction() {
+    // const formData = await obj.request.formData()
+    const email = "b@b.com" as string
+    const password = "w123" as string
     const creds = {email, password}
 
     // const pathname = new URL(obj.request.url).pathname
@@ -13,15 +14,20 @@ export async function loginAction(obj: {request: Request, params: object}): Prom
         const user = await getUser(creds)
         // console.log("User: ", user)
         const transactions = await getTransactions(user.user.id)
-        console.log("Transactions: ", transactions)
-        // const vans = await getHostVans(user.user.id)
-        // localStorage.setItem('isLoggedIn', 'true')
+        // console.log("Transactions: ", transactions)
+        const vans = await getHostVans(user.user.id)
+        const reviews = await getReviews(user.user.id)
+        // console.log("Reviews: ", reviews)
+        sessionStorage.setItem('isLoggedIn', 'true')
         return {
             // userName: user.user.name,
             // email: user.user.email,
             // userId: user.user.id,
             // isLoggedIn: true,
             incomeDays: 0,
+            reviewsDays: 0,
+            dashboardDays: 0,
+            vanType: "allVans",
             user: {
                 userName: user.user.name,
                 email: user.user.email,
@@ -29,8 +35,9 @@ export async function loginAction(obj: {request: Request, params: object}): Prom
                 isLoggedIn: true,
             },
             transactions: transactions,
-            // vans: vans,
-            dispatch: () => {}
+            userVans: vans,
+            reviews: reviews,
+            // dispatch: () => {}
         } 
     }
     catch (error) {

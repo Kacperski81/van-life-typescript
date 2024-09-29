@@ -3,14 +3,20 @@
 export type ColorUtility = "bg" | "stroke" | "fill" | "text";
 
 export const chartColors = {
+  allVans: {
+    bg: "bg-red-500",
+    stroke: "stroke-red-500",
+    fill: "fill-red-500",
+    text: "text-red-500",
+  },
   luxury: {
-    bg: "bg-[#FF7654]",
+    bg: "bg-[#161616]",
     stroke: "stroke-blue-500",
     fill: "fill-[#161616]",
     text: "text-blue-500",
   },
   rugged: {
-    bg: "bg-[#76FF54]",
+    bg: "bg-[#115E59]",
     stroke: "stroke-emerald-500",
     fill: "fill-[#115E59]",
     text: "text-emerald-500",

@@ -14,20 +14,19 @@ export function Layout() {
   }, [location.pathname]);
 
   const handleNavToggle = () => {
-    console.log("clicked");
     setNavToggle((prev) => !prev);
   };
+  
   return (
-    // <div className="grid grid-rows-layout font-sans max-w-screen-2xl mx-auto h-screen">
     <div
       className={clsx(
-        "mx-auto grid h-screen max-w-screen-2xl grid-rows-hidden-menu font-sans text-sm transition-[grid] md:flex md:flex-col",
+        "grid h-screen grid-rows-hidden-menu bg-background font-sans text-sm transition-[grid] lg:bg-transparent",
         { "grid grid-rows-mobile-menu transition-[grid]": !navToggle },
       )}
     >
       <UserProvider>
         <Header navToggle={navToggle} handleNavToggle={handleNavToggle} />
-        <main className="flex grow bg-background bg-contain bg-center bg-no-repeat xl:bg-background-large xl:bg-mapbg">
+        <main className="flex bg-contain bg-center bg-no-repeat lg:bg-mapbg">
           <Outlet />
         </main>
         <Footer />

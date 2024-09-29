@@ -1,16 +1,25 @@
 // import { useState } from "react";
 import { cx } from "../lib/utils";
 import { Transaction } from "../types";
-import { BarChart, TooltipProps } from "./BarChart";
+import { BarChart, TooltipProps } from "./Charts/BarChart";
+import { useUser } from "../UserContext";
+// import { Legend } from "recharts";
+// import { BarChart3 } from "./Charts/BarChart3";
+// import { DonutChartHero } from "./Charts/DountChartHero";
+// import { BarChart3 } from "./Charts/BarChart3";
+// import SingleVanChart from "./Charts/SingleVanChart";
+// import { DonutChart } from "./Charts/DonutChart";
+// import { BarChart } from "recharts";
 
 const valueFormatter = (number: number) => {
   return Intl.NumberFormat("uk").format(number).toString();
 };
 
-const Tooltip = ({ payload, active, label }: TooltipProps) => {
+export const Tooltip = ({ payload, active, label }: TooltipProps) => {
   if (!active || !payload || payload.length === 0) return null;
+  console.log({payload})
   const data = payload.map((item) => ({
-    total: item.payload.amount,
+    total: item.payload.total,
     type: item.category,
     value: item.value,
     percentage: (
@@ -21,7 +30,7 @@ const Tooltip = ({ payload, active, label }: TooltipProps) => {
       100
     ).toFixed(0),
   }));
-
+  // console.log(data);
   return (
     <>
       <div className="w-60 rounded-md border border-gray-500/10 bg-blue-500 px-4 py-1.5 text-sm shadow-md dark:border-gray-400/20 dark:bg-gray-900">
@@ -77,7 +86,6 @@ const Tooltip = ({ payload, active, label }: TooltipProps) => {
 };
 
 // type VanTypeFilter = "all" | "luxury" | "rugged" | "simple";
-const vanTypes = ["luxury", "rugged", "simple"];
 
 export default function StackedBarChart({
   transactions,
@@ -85,35 +93,61 @@ export default function StackedBarChart({
   transactions: Transaction[];
 }) {
   //   const [vanTypeFilter, setVanTypeFilter] = useState<VanTypeFilter>("all");
+  const {
+    state: { vanType },
+  } = useUser();
 
+  const dataToChart2 = transactions.map((transaction) => {
+    return {
+      date: transaction.date,
+      total: transaction.total,
+      luxury: transaction.luxury.price,
+      rugged: transaction.rugged.price,
+      simple: transaction.simple.price,
+    }
+  })
   return (
-    <div style={{ minWidth: "300px", minHeight: "300px" }}>
-      <h2>abc</h2>
-      <BarChart
-        className="hidden h-96 sm:block"
-        data={transactions}
-        index="date"
-        categories={["luxury", "rugged", "simple"]}
-        type="stacked"
-        colors={["luxury", "rugged", "simple"]}
-        valueFormatter={valueFormatter}
-        yAxisWidth={35}
-        showLegend={false}
-        customTooltip={Tooltip}
-      />
-      <BarChart
-        className="h-80 sm:hidden"
-        data={transactions}
-        index="date"
-        categories={["luxury", "rugged", "simple"]}
-        type="stacked"
-        colors={["luxury", "rugged", "simple"]}
-        valueFormatter={valueFormatter}
-        showYAxis={false}
-        showLegend={false}
-        startEndOnly={true}
-        customTooltip={Tooltip}
-      />
+    <div className="min-w-[300px] max-w-[800px] md:w-[500px] lg:w-[600px]">
+      {vanType === "allVans" ? (
+        <>
+          <div className="h-64 w-full lg:h-[300px] lg:w-[500px]">
+            <BarChart
+              className="h-64"
+              data={dataToChart2}
+              index="date"
+              categories={["luxury", "rugged", "simple"]}
+              type="stacked"
+              colors={["luxury", "rugged", "simple"]}
+              valueFormatter={valueFormatter}
+              yAxisWidth={35}
+              maxValue={240}
+              showLegend={true}
+              customTooltip={Tooltip}
+              legendPosition="right"
+            >
+            </BarChart>
+          </div>
+          {/* <div className="h-64 w-full lg:h-[350px] lg:w-[600px]">
+            <BarChart
+              className="h-80 sm:hidden"
+              data={transactions}
+              index="date"
+              categories={["luxury", "rugged", "simple"]}
+              type="stacked"
+              colors={["luxury", "rugged", "simple"]}
+              valueFormatter={valueFormatter}
+              showYAxis={false}
+              showLegend={false}
+              startEndOnly={true}
+              customTooltip={Tooltip}
+            />
+          </div> */}
+        </>
+      ) : (
+        // <BarChart3 />
+        // <SingleVanChart />
+        <h2>Abc</h2>
+      )}
     </div>
   );
 }

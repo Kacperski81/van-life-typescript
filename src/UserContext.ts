@@ -1,6 +1,6 @@
 import { createContext } from "./create-context";
-import { UserState } from "./types";
+import { UserState, UserAction } from "./types";
 
-const [useUser, UserProvider] = createContext<UserState>();
+const [useUser, UserProvider] = createContext<{state: UserState; dispatch: React.Dispatch<UserAction> }>();
 
 export { useUser, UserProvider };

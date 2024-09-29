@@ -26,8 +26,7 @@ export function VanCard({
   const filterTypeURL: string | null = searchParams.toString() || null;
   const filterType: string | null = searchParams.get("type") || null;
 
-  const {isLargeScreen} = useVanCard();
-  console.log({isLargeScreen})
+  const { isLargeScreen } = useVanCard();
   const filterStyle = `var(--color-${type})`;
   const isActive = cardIndex === activeIndex;
   const cardStyle = isActive
@@ -35,12 +34,22 @@ export function VanCard({
     : "xl:transform xl:scale-50 xl:opacity-95";
   return (
     <div
-      className={`mx-auto rounded-lg bg-background bg-white p-2 transition-all duration-500 lg:max-w-[340px] xl:aspect-[20/9] xl:min-w-[340px] ${cardStyle}`}
+      className={`mx-auto w-full rounded-lg bg-background bg-white p-2 transition-all duration-500 lg:max-w-[340px] xl:aspect-[20/9] xl:min-w-[340px] ${cardStyle}`}
       style={{ translate: `${-100 * activeIndex}%` }}
     >
       <Link
-        to={isLargeScreen && isActive ? `${id}` : !isLargeScreen ? `${id}` : ""}
+        to={
+          isLargeScreen && isActive
+            ? `${id}`
+            : isLargeScreen && !isActive
+              ? filterType
+                ? `?type=${type}`
+                : ""
+              : `${id}`
+        }
         state={{
+          //pass isActive here to the VanDetails component
+          activeVan: activeIndex,
           filter: filterType,
           search: filterTypeURL,
         }}

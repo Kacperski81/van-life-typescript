@@ -7,18 +7,21 @@
     --color-simple: 255 118 84;
     --color-luxury: 22 22 22;
     --color-rugged: 17 94 89;
+    --color-active-simple: #e17654;
+    --color-active-luxury: #161616;
+    --color-active-rugged: #115e59;
   }
   * {
-    @apply box-border;
+    box-sizing: border-box;
   }
 }
 
 html {
-  @apply bg-[#e9dbc0] bg-cover bg-center bg-no-repeat font-sans;
+  @apply lg:bg-background-large bg-cover bg-center bg-no-repeat font-sans;
 }
 
 body {
-  @apply mx-auto max-w-[1440px] md:px-0;
+  @apply mx-auto max-w-[1440px] md:px-0 h-full;
 }
 
 h2 {
@@ -62,8 +65,8 @@ p {
 }
 
 @font-face {
-  font-family: 'Geist Sans';
-  src: url('src/assets/fonts/GeistVF.woff2') format('woff2');
+  font-family: "Geist Sans";
+  src: url("src/assets/fonts/GeistVF.woff2") format("woff2");
   font-style: normal;
   font-weight: 100 900;
 }
@@ -71,4 +74,32 @@ p {
 .chart-container {
   min-width: 300px;
   min-height: 300px;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: orange;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 2px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: orange;
+}
+
+/* Hide scrollbar arrows for WebKit browsers */
+.custom-scrollbar::-webkit-scrollbar-button {
+  display: none;
+}
+
+/* Custom scrollbar for Firefox */
+.custom-scrollbar {
+  scrollbar-width: thin; /* Options: auto, thin, none */
+  scrollbar-color: orange #e9dbc0; /* thumb color, track color */
 }

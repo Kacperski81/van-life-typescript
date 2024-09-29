@@ -22,11 +22,20 @@ import {
   constructCategoryColors,
   getColorClassName,
   getYAxisDomain,
-} from "../lib/chartUtils";
-import { useOnWindowResize } from "../hooks/useOnWindowResize";
-import { cx } from "../lib/utils";
+} from "../../lib/chartUtils";
+import { useOnWindowResize } from "../../hooks/useOnWindowResize";
+import { cx } from "../../lib/utils";
 
 //#region Shape
+// const customLegendPayload: {
+//   value: string;
+//   type: LegendType;
+//   color: string;
+// }[] = [
+//   { value: "The Cruiser", type: "square", color: "#161616" },
+//   { value: "Green Wonder", type: "square", color: "#115e59" },
+//   { value: "Modest Explorer", type: "square", color: "#E17654" },
+// ];
 
 function deepEqual<T>(obj1: T, obj2: T): boolean {
   if (obj1 === obj2) return true;
@@ -106,7 +115,7 @@ const LegendItem = ({
     <li
       className={cx(
         // base
-        "group inline-flex flex-nowrap items-center gap-1.5 whitespace-nowrap rounded px-2 py-1 transition",
+        "group inline-flex flex-nowrap items-center gap-1.5 whitespace-nowrap rounded px-2 py-0 transition",
         hasOnValueChange
           ? "cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800"
           : "cursor-default",
@@ -135,7 +144,7 @@ const LegendItem = ({
           activeLegend && activeLegend !== name ? "opacity-40" : "opacity-100",
         )}
       >
-        {name}
+        {name === "simple" ? "Modest Explorer" : name === "rugged" ? "Green Wonder" : "The Cruiser"}
       </p>
     </li>
   );
@@ -392,13 +401,12 @@ const ChartLegend = (
 
   const paddingLeft =
     legendPosition === "left" && yAxisWidth ? yAxisWidth - 8 : 0;
-
   return (
     <div
       style={{ paddingLeft: paddingLeft }}
       ref={legendRef}
       className={cx(
-        "flex items-center",
+        "flex",
         { "justify-center": legendPosition === "center" },
         {
           "justify-start": legendPosition === "left",
@@ -650,9 +658,10 @@ const BarChart = React.forwardRef<HTMLDivElement, BarChartProps>(
     return (
       <div
         ref={forwardedRef}
-        className={cx("h-80 w-full", className)}
+        className={cx("h-14 w-full", className)}
         tremor-id="tremor-raw"
         {...other}
+        style={{ backgroundColor: ""}}
       >
         <ResponsiveContainer>
           <RechartsBarChart
@@ -670,11 +679,12 @@ const BarChart = React.forwardRef<HTMLDivElement, BarChartProps>(
               bottom: xAxisLabel ? 30 : undefined,
               left: yAxisLabel ? 20 : undefined,
               right: yAxisLabel ? 5 : undefined,
-              top: 5,
+              top: 20,
             }}
             stackOffset={type === "percent" ? "expand" : undefined}
             layout={layout}
             barCategoryGap={barCategoryGap}
+            className=""
           >
             {showGridLines ? (
               <CartesianGrid
@@ -698,6 +708,7 @@ const BarChart = React.forwardRef<HTMLDivElement, BarChartProps>(
                 "fill-gray-500 dark:fill-gray-500",
                 { "mt-4": layout !== "vertical" },
               )}
+              style={{}}
               tickLine={false}
               axisLine={false}
               minTickGap={tickGap}
@@ -866,7 +877,7 @@ const BarChart = React.forwardRef<HTMLDivElement, BarChartProps>(
                 type="linear"
                 dataKey={category}
                 stackId={stacked ? "stack" : undefined}
-                isAnimationActive={false}
+                isAnimationActive={true}
                 fill=""
                 shape={(props: any) =>
                   renderShape(props, activeBar, activeLegend, layout)
@@ -874,6 +885,11 @@ const BarChart = React.forwardRef<HTMLDivElement, BarChartProps>(
                 onClick={onBarClick}
               />
             ))}
+            {/* <RechartsLegend 
+              verticalAlign="top"
+              align="right"
+              payload={customLegendPayload}
+            /> */}
           </RechartsBarChart>
         </ResponsiveContainer>
       </div>

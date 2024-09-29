@@ -1,7 +1,9 @@
 export function Footer() {
-    return (
-        <footer className="flex flex-row justify-center items-center bg-[#252525] xl:bg-transparent md:py-3 xl:py-0 xl:pb-3">
-            <p className="text-[#AAAAAA] text-sm xl:text-black font-bold">&#169; 2024 #VANLIFE</p>
-        </footer>
-    )
+  return (
+    <footer className="flex flex-row items-center justify-center bg-[#252525] md:py-3 lg:bg-transparent xl:py-0">
+      <p className="text-sm font-bold text-[#AAAAAA] lg:text-black">
+        &#169; 2024 #VANLIFE
+      </p>
+    </footer>
+  );
 }

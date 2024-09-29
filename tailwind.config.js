@@ -89,9 +89,9 @@ export default {
         "tablet-menu": `auto auto 70px`,
       },
       colors: {
-        background: "#FFF7ED",
+        "background": "#FFF7ED",
         "background-large": "#e9dbc0",
-        footer: "#252525",
+        "footer": "#252525",
         "font-footer": "#AAAAAA",
         "light-orange": "#FFCC8D",
         "filter-normal": "#FFEAD0",
@@ -105,10 +105,11 @@ export default {
         "hero-image": "url('/background.png')",
         "about-image": "url('/hero-about.png')",
         "about-image-hd": "url('/hero-about-hd.png')",
-        mapbg: "url('/vanbg11.png')",
+        "mapbg": "url('/vanbg11.png')",
       },
       boxShadow: {
         "3xl": "10px 35px 60px 5px rgba(255, 255, 255, 0.3)",
+        "slider": "0 0 20px rgba(255, 255, 255, 1), 0 0 40px rgba(255, 255, 255, 0.9), 0 0 60px rgba(255, 255, 255, 0.8)"
       },
       textShadow: {
         default: textShadowValue,

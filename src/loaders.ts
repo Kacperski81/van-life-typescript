@@ -1,5 +1,11 @@
 import { defer } from "react-router-dom";
-import { getVan, getVans, getHostVans, getHostVan, getTransactions, getReviews } from "./api";
+import {
+  getVan,
+  getVans,
+  getHostVans,
+  getHostVan,
+  getTransactions,
+} from "./api";
 import { requireAuth } from "./utils";
 
 export async function vansLoader() {
@@ -44,41 +50,7 @@ export async function hostIncomeLoader() {
   try {
     const loggedUser = await requireAuth();
     const transactions = getTransactions(loggedUser.userId);
-    return defer({ transactions })
-  } catch (error) {
-    console.log({ error });
-  }
-}
-
-export async function reviewsLoader() {
-  try {
-    // const loggedUser = await requireAuth();
-    const reviews = getReviews();
-    return defer({ reviews });
-  } catch (error) {
-    console.log({ error });
-  }
-}
-
-export async function dashboardLoader() {
-  try {
-    const loggedUser = await requireAuth();
-    const hostVans = getHostVans(loggedUser.userId);
-    const transactions = getTransactions(loggedUser.userId);
-    const reviews = getReviews();
-    return defer({ hostVans, transactions, reviews });
-  } catch (error) {
-    console.log({ error });
-  }
-}
-
-export async function hostDashboardLoader() {
-  try {
-    const loggedUser = await requireAuth();
-    const hostVans = getHostVans(loggedUser.userId);
-    const transactions = getTransactions(loggedUser.userId);
-    const reviews = getReviews();
-    return defer({ hostVans, transactions, reviews });
+    return defer({ transactions });
   } catch (error) {
     console.log({ error });
   }
