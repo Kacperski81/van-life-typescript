@@ -203,7 +203,6 @@ const DonutChart = React.forwardRef<HTMLDivElement, DonutChartProps>(
       data,
       value,
     );
-    console.log({data});
     const categories = Array.from(new Set(data.map((item) => item[category])));
     const categoryColors = constructCategoryColors(categories, colors);
 
@@ -255,7 +254,7 @@ const DonutChart = React.forwardRef<HTMLDivElement, DonutChartProps>(
         <text
           x={x}
           y={y}
-          fill="white"
+          fill="rgb(100,100,100)"
           textAnchor={x > cx ? "start" : "end"}
           dominantBaseline="central"
         >
@@ -264,7 +263,6 @@ const DonutChart = React.forwardRef<HTMLDivElement, DonutChartProps>(
         </text>
       );
     };
-    console.log({label})
     return (
       <div
         ref={forwardedRef}

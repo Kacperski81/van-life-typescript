@@ -103,3 +103,10 @@ p {
   scrollbar-width: thin; /* Options: auto, thin, none */
   scrollbar-color: orange #e9dbc0; /* thumb color, track color */
 }
+
+@media (max-width: 1024px) {
+  .custom-scrollbar {
+    scrollbar-color: orange transparent;
+    scrollbar-gutter: transparent;
+  }
+}

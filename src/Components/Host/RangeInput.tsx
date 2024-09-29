@@ -1,15 +1,14 @@
-import { useUser } from "../../UserContext";
+// import { useUser } from "../../UserContext";
 import { changeReviewsDays } from "../../reducer/reducer";
-
+import { useReviews } from "../../hooks/useReviews";
 export default function RangeInput() {
-  const { state: {reviewsDays}, dispatch } = useUser();
+
+  const { reviewsDays, dispatch } = useReviews()
 
   return (
     <div className="flex gap-1 my-4">
       <span>Last </span>
       <input
-        // id="daysList"
-        // list="daysList"
         type="range"
         min="1"
         max="10"
