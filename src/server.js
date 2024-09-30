@@ -35,7 +35,7 @@ createServer({
       name: "Reliable Red",
       price: 100,
       description:
-        "Reliable Red is a van that was made for travelling. The inside is comfortable and cozy, with plenty of space to stretch out in. There's a small kitchen, so you can cook if you need to. You'll feel like home as soon as you step out of it.",
+        "Reliable Red is a van that was made for traveling. The inside is comfortable and cozy, with plenty of space to stretch out in. There's a small kitchen, so you can cook if you need to. You'll feel like home as soon as you step out of it.",
       imageUrl: "/vans/reliable-red.png",
       type: "luxury",
       hostId: "456",
@@ -427,7 +427,7 @@ createServer({
       date: "09/07",
       text: "The Cruiser is definitely worth the price. It's a high-quality van with all the features you could want. We were very impressed with the value for money.",
       id: "16",
-      vanId: "1",
+      vanId: "5",
       hostId: "123",
     });
     server.create("review", {

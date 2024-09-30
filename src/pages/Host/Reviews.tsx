@@ -25,7 +25,7 @@ export function Reviews() {
 
   return (
     <section className="mx-auto max-w-[550px] px-4 py-3 md:mx-0 md:min-w-[600px] md:py-0 lg:max-w-[800px]">
-      <h2 className="text-4xl">Your reviews</h2>
+      <h2>Your reviews</h2>
       <div className="my-4 flex gap-1">
         <span>Last </span>
         <input
@@ -47,7 +47,7 @@ export function Reviews() {
       </div>
       <ReviewsChart reviews={filteredReviews2} />
       <h3 className="text-lg font-bold">Reviews ({filteredReviews2.length})</h3>
-      <div className="custom-scrollbar md:h-[320px] md:w-[550px] md:overflow-y-auto md:px-2">
+      <div className="custom-scrollbar md:-[320px] md:w-[550px] md:overflow-y-auto md:px-2">
         <ReviewsDetails reviews={filteredReviews2} />
       </div>
     </section>
