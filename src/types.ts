@@ -8,6 +8,12 @@ export type Van = {
   hostId: string;
 };
 
+export type Creds = {
+    name: string;
+    id: string;
+    email: string;
+};
+
 export type VanType = "allVans" | "luxury" | "rugged" | "simple";
 
 export type Error = {
@@ -135,7 +141,12 @@ export type ChangeDashboardDaysAction = {
   };
 };
 
-export type UserAction = LoginUserAction | LogoutUserAction | ChangeDaysAction | ChangeVanAction | ChangeDashboardDaysAction;
+export type UserAction =
+  | LoginUserAction
+  | LogoutUserAction
+  | ChangeDaysAction
+  | ChangeVanAction
+  | ChangeDashboardDaysAction;
 
 export type UserReducer = (state: UserState, action: UserAction) => UserState;
 

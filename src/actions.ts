@@ -12,11 +12,12 @@ export async function loginAction() {
     // console.log(pathname)
     try {
         const user = await getUser(creds)
+        console.log("User: ", user)
         // console.log("User: ", user)
-        const transactions = await getTransactions(user.user.id)
+        const transactions = await getTransactions(user.id)
         // console.log("Transactions: ", transactions)
-        const vans = await getHostVans(user.user.id)
-        const reviews = await getReviews(user.user.id)
+        const vans = await getHostVans(user.id)
+        const reviews = await getReviews(user.id)
         // console.log("Reviews: ", reviews)
         sessionStorage.setItem('isLoggedIn', 'true')
         return {
@@ -29,9 +30,9 @@ export async function loginAction() {
             dashboardDays: 0,
             vanType: "allVans",
             user: {
-                userName: user.user.name,
-                email: user.user.email,
-                userId: user.user.id,
+                userName: user.name,
+                email: user.email,
+                userId: user.id,
                 isLoggedIn: true,
             },
             transactions: transactions,

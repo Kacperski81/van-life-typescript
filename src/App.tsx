@@ -20,7 +20,7 @@ import { Login } from "./Components/Login";
 import { loginAction } from "./actions";
 import { requireAuth } from "./utils";
 
-import "./server";
+// import "./server";
 
 const router = createBrowserRouter([
   {

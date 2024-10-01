@@ -1,102 +1,106 @@
-import { Van, InputType } from "./types";
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  doc,
+  getDoc,
+  query,
+  where,
+} from "firebase/firestore/lite";
+import { Van, InputType, Creds, Transaction, Review } from "./types";
 
-type Creds = {
-  user: {
-    name: string;
-    id: string;
-    email: string;
-  };
+const firebaseConfig = {
+  apiKey: "AIzaSyDvkLo6444LhE40x0rIFzzLvt1xju6NVxM",
+  authDomain: "vanlife-typescript.firebaseapp.com",
+  projectId: "vanlife-typescript",
+  storageBucket: "vanlife-typescript.appspot.com",
+  messagingSenderId: "1050310032126",
+  appId: "1:1050310032126:web:73118881d5e88e990643af",
+  measurementId: "G-T4SG77QY2P",
 };
 
-export async function getVan(id: string): Promise<Van | Error> {
-  const url = `/api/vans/${id}`;
-  try {
-    const response = await fetch(url);
-    const data = await response.json();
-    return data.vans;
-  } catch (error) {
-    throw new Error("Failed to fetch van");
-  }
-}
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const db = getFirestore(app);
+const vansCollection = collection(db, "vans");
+const usersCollection = collection(db, "users");
+const transactionsCollection = collection(db, "transactions");
+const reviewsCollection = collection(db, "reviews");
 
 export async function getVans(): Promise<Van[]> {
-  const url = "/api/vans";
-  try {
-    const response = await fetch(url);
-    const data = await response.json();
-    return data.vans;
-  } catch (error) {
-    throw new Error("vans not found");
-  }
+  const snapshot = await getDocs(vansCollection);
+  const vans = snapshot.docs.map((doc) => ({
+    ...doc.data(),
+    id: doc.id,
+  }));
+  console.log(vans);
+  return vans;
+}
+
+export async function getVan(id: string): Promise<Van> {
+  const docRef = doc(db, "vans", id);
+  const snapshot = await getDoc(docRef);
+  return {
+    ...snapshot.data(),
+    id: snapshot.id,
+  };
 }
 
 export async function getHostVans(hostId: string): Promise<Van[]> {
-  const url = "/api/host/vans";
-  const headers = {
-    "Content-Type": "application/json",
-    ...(hostId && { HostId: hostId }),
-  };
-  const res = await fetch(url, { headers });
-  const data = await res.json();
-  if (!res.ok) {
-    throw new Error("Failed to fetch host vans");
-  }
-  return data.vans;
+  const q = query(vansCollection, where("hostId", "==", hostId));
+  const snapshot = await getDocs(q);
+  const vans = snapshot.docs.map((doc) => ({
+    ...doc.data(),
+    id: doc.id,
+  }));
+  return vans;
 }
 
 export async function getHostVan(hostId: string, id: string): Promise<Van> {
-  const url = `/api/host/vans/${id}`;
-  const headers = {
-    "Content-Type": "application/json",
-    ...(hostId && { HostId: hostId }),
+  const q = query(
+    vansCollection,
+    where("hostId", "==", hostId),
+    where("id", "==", id),
+  );
+  const snapshot = await getDocs(q);
+  return {
+    ...snapshot.docs[0].data(),
+    id: snapshot.docs[0].id,
   };
-  const res = await fetch(url, { headers });
-  if (!res.ok) {
-    throw new Error("Failed to fetch host van");
-  }
-  const data = await res.json();
-  return data.vans;
 }
 
 export async function getUser(creds: InputType): Promise<Creds> {
-  const res = await fetch("/api/login", {
-    method: "post",
-    body: JSON.stringify(creds),
-  });
-  const data = await res.json();
-
-  if (!res.ok) {
-    throw {
-      message: data.message,
-    };
-  }
-  return data;
+  const q = query(
+    usersCollection,
+    where("email", "==", creds.email),
+    where("password", "==", creds.password),
+  );
+  const snapshot = await getDocs(q);
+  const user = snapshot.docs[0].data();
+  // console.log({user})
+  console.log(user)
+  return user;
 }
 
-export async function getTransactions(hostId: string) {
-  const url = "/api/transactions";
-  const headers = {
-    "Content-Type": "application/json",
-    ...(hostId && { HostId: hostId }),
-  };
-  const res = await fetch(url, { headers });
-  if (!res.ok) {
-    throw new Error("Failed to fetch transactions");
-  }
-  const data = await res.json();
-  return data.transactions;
+export async function getTransactions(hostId: string): Promise<Transaction[]> {
+  const q = query(transactionsCollection, where("hostId", "==", hostId));
+  const snapshot = await getDocs(q);
+  const transactions = snapshot.docs.map((doc) => ({
+    ...doc.data(),
+    id: doc.id,
+  }))
+  return transactions;
 }
 
-export async function getReviews(hostId: string) {
-  const url = "/api/reviews";
-  const headers = {
-    "Content-Type": "application/json",
-    ...(hostId && { HostId: hostId }),
-  };
-  const res = await fetch(url, { headers });
-  if (!res.ok) {
-    throw new Error("Failed to fetch reviews");
-  }
-  const data = await res.json();
-  return data.reviews;
+export async function getReviews(hostId: string): Promise<Review[]> {
+  const q = query(reviewsCollection, where("hostId", "==", hostId));
+  const snapshot = await getDocs(q);
+  const reviews = snapshot.docs.map((doc) => ({
+    ...doc.data(),
+    id: doc.id,
+  }))
+  return reviews;
 }
+
