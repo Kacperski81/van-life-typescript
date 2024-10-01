@@ -47,7 +47,7 @@ export function Reviews() {
       </div>
       <ReviewsChart reviews={filteredReviews2} />
       <h3 className="text-lg font-bold">Reviews ({filteredReviews2.length})</h3>
-      <div className="custom-scrollbar md:-[320px] md:w-[550px] md:overflow-y-auto md:px-2">
+      <div className="custom-scrollbar md:-[320px] md:w-[550px] md:h-[320px] md:overflow-y-auto md:px-2">
         <ReviewsDetails reviews={filteredReviews2} />
       </div>
     </section>

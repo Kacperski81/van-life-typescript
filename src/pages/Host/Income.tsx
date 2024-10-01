@@ -49,7 +49,7 @@ export function Income() {
       </div>
       <div>
         <h3 className="text-xl font-bold mb-3">Your transactions ({filteredTransactions.length})</h3>
-        <div className="flex flex-col gap-2 rounded-lg custom-scrollbar md:h-[320px] md:w-[550px] md:overflow-y-auto md:px-2">
+        <div className="flex flex-col gap-2 rounded-lg custom-scrollbar md:h-[220px] md:w-[550px] md:overflow-y-auto md:px-2">
           {filteredTransactions.map((transaction) => {
             const date = stringToDate(transaction.date).toLocaleDateString();
             return (

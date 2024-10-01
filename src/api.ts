@@ -110,12 +110,13 @@ export async function getUser(creds: InputType): Promise<Creds> {
 
 export async function getTransactions(hostId: string): Promise<Transaction[]> {
   try {
-    const q = query(transactionsCollection, where("hostId", "==", hostId));
+    const q = query(transactionsCollection, where("userId", "==", hostId));
     const snapshot = await getDocs(q);
     const transactions = snapshot.docs.map((doc) => ({
       ...doc.data(),
       id: doc.id,
     })) as Transaction[];
+    console.log({ transactions });
     return transactions;
   } catch (error) {
     console.log({ error });
@@ -131,6 +132,7 @@ export async function getReviews(hostId: string): Promise<Review[]> {
       ...doc.data(),
       id: doc.id,
     })) as Review[];
+    console.log({ reviews });
     return reviews;
   } catch (error) {
     console.log({ error });

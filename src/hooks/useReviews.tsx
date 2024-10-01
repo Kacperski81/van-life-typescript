@@ -4,7 +4,8 @@ export function useReviews() {
   const {
     state: { dashboardDays,reviewsDays, reviews, transactions}, dispatch
   } = useUser();
-
+  console.log({reviews})
+  console.log({transactions})
   const filteredReviews2 = reviews.filter((review) => {
     const firstDay = transactions.slice(transactions.length - dashboardDays)[0].date;
 
