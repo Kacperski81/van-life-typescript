@@ -4,9 +4,10 @@ export function Home() {
   const navigate = useNavigate();
   return (
     <section
-      className="flex w-full items-center bg-hero-image bg-cover bg-center bg-no-repeat lg:grow lg:bg-none"
+      className="flex w-full items-center  bg-cover bg-hero-image bg-center bg-no-repeat lg:grow lg:bg-none"
     >
-      <div className="mx-auto flex max-w-[500px] flex-col justify-center gap-10 px-4 py-5 lg:bg-[rgba(233,217,191,0.7)]">
+      <div className=""></div>
+      <div className="mx-auto flex max-w-[500px] flex-col justify-center gap-10 px-4 py-5 bg-[rgb(0,0,0,0.5)] shadow-xl lg:bg-[rgba(233,217,191,0.7)]">
         <h2 className="text-4xl font-extrabold text-white text-shadow md:text-[39px] md:leading-[38px] lg:text-black">
           You got the travel plans, we got the travel vans.
         </h2>

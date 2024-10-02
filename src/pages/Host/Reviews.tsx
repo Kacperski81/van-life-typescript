@@ -1,18 +1,21 @@
 import { BsStarFill } from "react-icons/bs";
 import { useUser } from "../../UserContext";
 import ReviewsChart from "../../Components/Charts/Reviews/ReviewsChart";
-import ReviewsDetails from "../../Components/Charts/Reviews/ReviewsDetails";
 import { changeReviewsDays } from "../../reducer/reducer";
+import ReviewsSorter from "../../Components/Host/ReviewsSorter";
 export function Reviews() {
   const {
-    state: { reviewsDays, reviews, transactions}, dispatch
+    state: { reviewsDays, reviews, transactions },
+    dispatch,
   } = useUser();
   function stringToDate(dateString: string) {
     const [day, month] = dateString.split("/").map(Number);
     return new Date(2024, month - 1, day);
   }
+  
   const filteredReviews2 = reviews.filter((review) => {
-    const firstDay = transactions.slice(transactions.length - reviewsDays)[0].date;
+    const firstDay = transactions.slice(transactions.length - reviewsDays)[0]
+      .date;
 
     const date = stringToDate(firstDay);
     if (new Date(stringToDate(review.date)) >= date) {
@@ -46,10 +49,7 @@ export function Reviews() {
         <p className="text-base font-normal">overall rating</p>
       </div>
       <ReviewsChart reviews={filteredReviews2} />
-      <h3 className="text-lg font-bold">Reviews ({filteredReviews2.length})</h3>
-      <div className="custom-scrollbar md:-[320px] md:w-[550px] md:h-[320px] md:overflow-y-auto md:px-2">
-        <ReviewsDetails reviews={filteredReviews2} />
-      </div>
+      <ReviewsSorter reviews={filteredReviews2} />
     </section>
   );
 }

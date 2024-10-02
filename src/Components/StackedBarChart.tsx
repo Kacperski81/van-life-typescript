@@ -78,6 +78,7 @@ export default function StackedBarChart({
 }: {
   transactions: Transaction[];
 }) {
+  console.log({transactions})
 
   const dataToChart2 = transactions.map((transaction) => {
     return {

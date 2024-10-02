@@ -77,7 +77,12 @@ p {
 }
 
 .custom-scrollbar::-webkit-scrollbar {
-  width: 8px;
+  width: thin;
+  height: thin;
+}
+
+.custom-scrollbar::-webkit-scrollbar-button {
+  display: none;
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
@@ -85,7 +90,7 @@ p {
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #888;
+  background-color: #FFF7ED;
   border-radius: 2px;
 }
 
@@ -96,12 +101,13 @@ p {
 /* Hide scrollbar arrows for WebKit browsers */
 .custom-scrollbar::-webkit-scrollbar-button {
   display: none;
+
 }
 
 /* Custom scrollbar for Firefox */
 .custom-scrollbar {
   scrollbar-width: thin; /* Options: auto, thin, none */
-  scrollbar-color: orange #e9dbc0; /* thumb color, track color */
+  scrollbar-color: orange #FFF7ED; /* thumb color, track color */
 }
 
 @media (max-width: 1024px) {

@@ -7,7 +7,7 @@ export function HostVans() {
   } = useUser();
 
   return (
-    <section className="px-4 py-3 mx-auto md:mx-0 max-w-[550px] md:min-w-[600px] lg:max-w-[800px] md:py-0">
+    <section className="mx-auto max-w-[550px] px-4 py-3 md:mx-0 md:min-w-[600px] md:py-0 lg:max-w-[800px]">
       <h2>Your listed vans</h2>
       <div className="mt-4">
         {userVans.map((van) => {
