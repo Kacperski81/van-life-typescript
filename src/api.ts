@@ -116,7 +116,6 @@ export async function getTransactions(hostId: string): Promise<Transaction[]> {
       ...doc.data(),
       id: doc.id,
     })) as Transaction[];
-    console.log({ transactions });
     return transactions;
   } catch (error) {
     console.log({ error });
@@ -132,7 +131,6 @@ export async function getReviews(hostId: string): Promise<Review[]> {
       ...doc.data(),
       id: doc.id,
     })) as Review[];
-    console.log({ reviews });
     return reviews;
   } catch (error) {
     console.log({ error });

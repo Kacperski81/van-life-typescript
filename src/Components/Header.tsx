@@ -42,6 +42,7 @@ export function Header({ navToggle, handleNavToggle }: HeaderProps) {
               className={({ isActive }) =>
                 isActive ? "header-link-active" : "header-link"
               }
+              state={{abc: "dev"}}
             >
               Host
             </NavLink>
@@ -70,7 +71,6 @@ export function Header({ navToggle, handleNavToggle }: HeaderProps) {
             <li className="md:flex md:justify-center">
               <NavLink
                 onClick={() => {
-                  console.log("log out clicked");
                   sessionStorage.removeItem("isLoggedIn");
                   dispatch(logoutUser());
                   return navigate("/");
@@ -87,6 +87,7 @@ export function Header({ navToggle, handleNavToggle }: HeaderProps) {
                 className={({ isActive }) =>
                   isActive ? "header-link-active" : "header-link"
                 }
+                
               >
                 Login
               </NavLink>

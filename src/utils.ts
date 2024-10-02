@@ -14,11 +14,10 @@ export async function requireAuth() {
   const isLoggedIn = JSON.parse(
     sessionStorage.getItem("isLoggedIn") || "false",
   );
-  // console.log(str)
-  console.log({ isLoggedIn });
   if (!isLoggedIn) {
     throw {
       redirect: "/login",
+      state: {abc: "dev"},
     };
   }
   // console.log(isLoggedIn)

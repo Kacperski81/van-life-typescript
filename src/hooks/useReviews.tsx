@@ -2,12 +2,12 @@ import { stringToDate } from "../utils";
 import { useUser } from "../UserContext";
 export function useReviews() {
   const {
-    state: { dashboardDays,reviewsDays, reviews, transactions}, dispatch
+    state: { dashboardDays, reviewsDays, reviews, transactions },
+    dispatch,
   } = useUser();
-  console.log({reviews})
-  console.log({transactions})
   const filteredReviews2 = reviews.filter((review) => {
-    const firstDay = transactions.slice(transactions.length - dashboardDays)[0].date;
+    const firstDay = transactions.slice(transactions.length - dashboardDays)[0]
+      .date;
 
     const date = stringToDate(firstDay);
     if (new Date(stringToDate(review.date)) >= date) {
@@ -18,5 +18,5 @@ export function useReviews() {
     filteredReviews2.reduce((acc, curr) => acc + curr.rating, 0) /
     filteredReviews2.length;
   //
-  return { reviewsDays,filteredReviews2, averageRating, dispatch };
+  return { reviewsDays, filteredReviews2, averageRating, dispatch };
 }
