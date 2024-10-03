@@ -19,7 +19,7 @@ export function VanDetails() {
   function renderVan(van: Van) {
     const filterStyle = `var(--color-${van.type})`;
     return (
-      <div className="gap-6 md:flex md:p-4 xl:w-[1000px] xl:aspect-[16/8]">
+      <div className="gap-6 md:flex md:p-4 xl:w-[1000px] xl:aspect-[16/8] bg-background lg:bg-transparent">
         <div className="mb-4 aspect-square w-full bg-cover bg-center sm:mx-auto md:w-[50%]">
           <img
             src={van.imageUrl}

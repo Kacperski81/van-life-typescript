@@ -1,4 +1,4 @@
-import { NavLink, Link, Outlet } from "react-router-dom";
+import { NavLink, Link, Outlet, useParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { Van } from "../../types";
 import { useUser } from "../../UserContext";
@@ -6,10 +6,12 @@ export type ContextType = { hostVan: Van | null };
 
 export function HostVanDetails() {
   const location = useLocation();
+  const { id } = useParams<{ id: string }>();
+  const vanId = location.state.van || id
   const {
     state: { userVans },
   } = useUser();
-  const hostVan = userVans.find((van) => van.id === location.state?.vanId);
+  const hostVan = userVans.find((van) => van.id === vanId);
   const filterStyle = `var(--color-${hostVan?.type})`;
   console.log({filterStyle})
   return (
