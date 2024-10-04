@@ -92,7 +92,7 @@ export default function StackedBarChart({
   return (
     <div className="min-w-[300px] max-w-[800px] md:w-[500px] lg:w-[600px]">
       <>
-        <div className="h-64 w-full lg:h-[300px] lg:w-[500px]">
+        <div className="h-64 w-full lg:h-[300px] lg:w-[500px] flex items-center shadow-sm">
           <BarChart
             className="h-64"
             data={dataToChart2}

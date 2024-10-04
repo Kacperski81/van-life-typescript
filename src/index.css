@@ -17,7 +17,7 @@
 }
 
 html {
-  @apply lg:bg-background-large bg-cover bg-center bg-no-repeat font-sans;
+  @apply bg-background lg:bg-background-large bg-cover bg-center bg-no-repeat font-sans;
 }
 
 body {

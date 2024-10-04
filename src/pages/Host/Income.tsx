@@ -1,4 +1,5 @@
-import { DonutChartHero } from "../../Components/Charts/DountChartHero";
+// import { DonutChartHero } from "../../Components/Charts/DountChartHero";
+import { DonutChartLabel } from "../../Components/Charts/DonutChartLabel";
 import StackedBarChart from "../../Components/StackedBarChart";
 import { changeIncomeDays } from "../../reducer/reducer";
 import useIncome from "../../hooks/useIncome";
@@ -23,9 +24,10 @@ export function Income() {
         {incomeDays} day{incomeDays > 1 ? "s" : ""}
       </span>
       <h2 className="mt-4">£{amount}</h2>
-      <div className="flex flex-col lg:flex-row">
+      <div className="flex flex-col lg:flex-row pb-3">
         <StackedBarChart transactions={filteredTransactions} />
-        <DonutChartHero transactions={filteredTransactions} />
+        {/* <DonutChartHero transactions={filteredTransactions} /> */}
+        <DonutChartLabel transactions={filteredTransactions} />
       </div>
       <TransactionsDetails filteredTransactions={filteredTransactions} />
     </section>

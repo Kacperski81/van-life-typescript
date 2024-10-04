@@ -1,22 +1,12 @@
-import { useState, useEffect } from "react";
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { Header } from "../Components/Header";
 import { Footer } from "../Components/Footer";
 import clsx from "clsx";
 import { UserProvider } from "../UserProvider";
+import useLayout from "../hooks/useLayout";
 
 export function Layout() {
-  const [navToggle, setNavToggle] = useState<boolean>(true);
-  const location = useLocation();
-
-  useEffect(() => {
-    setNavToggle(true);
-  }, [location.pathname]);
-
-  const handleNavToggle = () => {
-    setNavToggle((prev) => !prev);
-  };
-  
+  const { navToggle, handleNavToggle } = useLayout();
   return (
     <div
       className={clsx(

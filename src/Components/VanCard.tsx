@@ -34,7 +34,7 @@ export function VanCard({
     : "xl:transform xl:scale-50 xl:opacity-95";
   return (
     <div
-      className={`mx-auto w-full rounded-lg bg-background bg-white p-2 transition-all duration-500 lg:max-w-[340px] xl:aspect-[20/9] xl:min-w-[340px] ${cardStyle}`}
+      className={`mx-auto w-full rounded-lg bg-background bg-white p-2 transition-all duration-500 lg:max-w-[340px] xl:aspect-[20/9] xl:min-w-[325px] ${cardStyle}`}
       style={{ translate: `${-100 * activeIndex}%` }}
     >
       <Link

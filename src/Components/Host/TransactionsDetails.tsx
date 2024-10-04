@@ -25,7 +25,7 @@ export default function TransactionsDetails({
           Your transactions ({filteredTransactions.length})
         </h3>
         <div className="flex gap-1 items-baseline">
-          <span>sort:</span>
+          {/* <span>sort:</span> */}
           <select className="py-0 bg-background border-none" onChange={(e) => setSort(e.target.value)}>
             <option value="asc">Ascending</option>
             <option value="desc">Descending</option>

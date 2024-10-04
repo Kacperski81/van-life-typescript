@@ -13,7 +13,6 @@ export function HostVanDetails() {
   } = useUser();
   const hostVan = userVans.find((van) => van.id === vanId);
   const filterStyle = `var(--color-${hostVan?.type})`;
-  console.log({filterStyle})
   return (
     <section className="mx-auto max-w-[550px] px-2 py-4 md:min-w-[750px] lg:py-4">
       <Link to="/host/vans">⬅️ Back to all vans</Link>
