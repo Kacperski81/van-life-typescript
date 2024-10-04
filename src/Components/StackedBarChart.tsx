@@ -8,7 +8,6 @@ const valueFormatter = (number: number) => {
 
 export const Tooltip = ({ payload, active, label }: TooltipProps) => {
   if (!active || !payload || payload.length === 0) return null;
-  console.log({ payload });
   const data = payload.map((item) => ({
     total: item.payload.total,
     type: item.category,
@@ -21,7 +20,6 @@ export const Tooltip = ({ payload, active, label }: TooltipProps) => {
       100
     ).toFixed(0),
   }));
-  // console.log(data);
   return (
     <>
       <div className="w-60 rounded-md border border-gray-500/10 bg-blue-500 px-4 py-1.5 text-sm shadow-md dark:border-gray-400/20 dark:bg-gray-900">
@@ -78,8 +76,6 @@ export default function StackedBarChart({
 }: {
   transactions: Transaction[];
 }) {
-  console.log({transactions})
-
   const dataToChart2 = transactions.map((transaction) => {
     return {
       date: transaction.date,
@@ -92,7 +88,7 @@ export default function StackedBarChart({
   return (
     <div className="min-w-[300px] max-w-[800px] md:w-[500px] lg:w-[600px]">
       <>
-        <div className="h-64 w-full lg:h-[300px] lg:w-[500px] flex items-center shadow-sm">
+        <div className="flex h-64 w-full items-center shadow-sm lg:h-[300px] lg:w-[500px]">
           <BarChart
             className="h-64"
             data={dataToChart2}

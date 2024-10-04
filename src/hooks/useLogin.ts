@@ -9,7 +9,6 @@ export default function useLogin() {
   const navigate = useNavigate();
   const navigation = useNavigation();
   const location = useLocation();
-  console.log(location);
   const memoUrl = useRef(location.state ? location.state : "/host");
 
   useEffect(() => {
