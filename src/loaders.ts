@@ -19,8 +19,12 @@ export async function vansLoader() {
 
 export async function vanLoader({ params }: { params: { id?: string } }) {
   if (!params.id) throw new Error("Van id is required");
-  const van = getVan(params.id);
-  return defer({ van });
+  try {
+    const van = getVan(params.id);
+    return defer({ van });
+  } catch (error) {
+    throw new Error("Failed to fetch van");
+  }
 }
 
 export async function hostVansLoader() {
@@ -29,9 +33,8 @@ export async function hostVansLoader() {
     const hostVans = getHostVans(loggedUser.userId);
     return defer({ hostVans });
   } catch (error) {
-    console.log({ error });
+    throw new Error("Failed to fetch host vans");
   }
-  return null;
 }
 
 export async function hostVanLoader({ params }: { params: { id?: string } }) {
@@ -41,7 +44,7 @@ export async function hostVanLoader({ params }: { params: { id?: string } }) {
     const van = getHostVan(loggedUser.userId, params.id);
     return defer({ van });
   } catch (error) {
-    console.log({ error });
+    throw new Error("Failed to fetch host van");
   }
   return null;
 }
@@ -52,6 +55,6 @@ export async function hostIncomeLoader() {
     const transactions = getTransactions(loggedUser.userId);
     return defer({ transactions });
   } catch (error) {
-    console.log({ error });
+    throw new Error("Failed to fetch host income");
   }
 }

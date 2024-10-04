@@ -1,5 +1,4 @@
 import { initializeApp } from "firebase/app";
-// import { getAnalytics } from "firebase/analytics";
 import {
   getFirestore,
   collection,
@@ -22,118 +21,205 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-// const analytics = getAnalytics(app);
 const db = getFirestore(app);
 const vansCollection = collection(db, "vans");
 const usersCollection = collection(db, "users");
 const transactionsCollection = collection(db, "transactions");
 const reviewsCollection = collection(db, "reviews");
 
-export async function getVans(): Promise<Van[]> {
+async function handleError<T>(promise: Promise<T>): Promise<T> {
   try {
-    const snapshot = await getDocs(vansCollection);
-    const vans = snapshot.docs.map((doc) => ({
-      ...doc.data(),
-      id: doc.id,
-    })) as Van[];
-    return vans;
+    return await promise;
   } catch (error) {
     console.log({ error });
-    throw new Error("Failed to fetch vans");
+    throw new Error("Failed to fetch data");
   }
+}
+
+export async function getVans(): Promise<Van[]> {
+  return handleError(
+    getDocs(vansCollection).then((snapshot) =>
+      snapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      })) as Van[]
+    )
+  );
 }
 
 export async function getVan(id: string): Promise<Van> {
-  try {
-    const docRef = doc(db, "vans", id);
-    const snapshot = await getDoc(docRef);
-    const van = {
+  return handleError(
+    getDoc(doc(db, "vans", id)).then((snapshot) => ({
       ...snapshot.data(),
       id: snapshot.id,
-    } as Van;
-    return van;
-  } catch (error) {
-    console.log({ error });
-    throw new Error("Failed to fetch van");
-  }
+    }) as Van)
+  );
 }
 
 export async function getHostVans(hostId: string): Promise<Van[]> {
-  try {
-    const q = query(vansCollection, where("hostId", "==", hostId));
-    const snapshot = await getDocs(q);
-    const vans = snapshot.docs.map((doc) => ({
-      ...doc.data(),
-      id: doc.id,
-    })) as Van[];
-    return vans;
-  } catch (error) {
-    console.log({ error });
-    throw new Error("Failed to fetch host vans");
-  }
+  return handleError(
+    getDocs(query(vansCollection, where("hostId", "==", hostId))).then(
+      (snapshot) =>
+        snapshot.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        })) as Van[]
+    )
+  );
 }
 
 export async function getHostVan(hostId: string, id: string): Promise<Van> {
-  try {
-    const q = query(
-      vansCollection,
-      where("hostId", "==", hostId),
-      where("id", "==", id),
-    );
-    const snapshot = await getDocs(q);
-    const hostVan = {
+  return handleError(
+    getDocs(
+      query(vansCollection, where("hostId", "==", hostId), where("id", "==", id))
+    ).then((snapshot) => ({
       ...snapshot.docs[0].data(),
       id: snapshot.docs[0].id,
-    } as Van;
-    return hostVan;
-  } catch (error) {
-    console.log({ error });
-    throw new Error("Failed to fetch host van");
-  }
+    }) as Van)
+  );
 }
 
 export async function getUser(creds: InputType): Promise<Creds> {
-  try {
-    const q = query(
-      usersCollection,
-      where("email", "==", creds.email),
-      where("password", "==", creds.password),
-    );
-    const snapshot = await getDocs(q);
-    const user = snapshot.docs[0].data() as Creds;
-    return user;
-  } catch (error) {
-    console.log({ error });
-    throw new Error("Failed to fetch user");
-  }
+  return handleError(
+    getDocs(
+      query(
+        usersCollection,
+        where("email", "==", creds.email),
+        where("password", "==", creds.password)
+      )
+    ).then((snapshot) => snapshot.docs[0].data() as Creds)
+  );
 }
 
 export async function getTransactions(hostId: string): Promise<Transaction[]> {
-  try {
-    const q = query(transactionsCollection, where("userId", "==", hostId));
-    const snapshot = await getDocs(q);
-    const transactions = snapshot.docs.map((doc) => ({
-      ...doc.data(),
-      id: doc.id,
-    })) as Transaction[];
-    return transactions;
-  } catch (error) {
-    console.log({ error });
-    throw new Error("Failed to fetch transactions");
-  }
+  return handleError(
+    getDocs(query(transactionsCollection, where("userId", "==", hostId))).then(
+      (snapshot) =>
+        snapshot.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        })) as Transaction[]
+    )
+  );
 }
 
 export async function getReviews(hostId: string): Promise<Review[]> {
-  try {
-    const q = query(reviewsCollection, where("hostId", "==", hostId));
-    const snapshot = await getDocs(q);
-    const reviews = snapshot.docs.map((doc) => ({
-      ...doc.data(),
-      id: doc.id,
-    })) as Review[];
-    return reviews;
-  } catch (error) {
-    console.log({ error });
-    throw new Error("Failed to fetch reviews");
-  }
+  return handleError(
+    getDocs(query(reviewsCollection, where("hostId", "==", hostId))).then(
+      (snapshot) =>
+        snapshot.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        })) as Review[]
+    )
+  );
 }
+
+// export async function getVans(): Promise<Van[]> {
+//   try {
+//     const snapshot = await getDocs(vansCollection);
+//     const vans = snapshot.docs.map((doc) => ({
+//       ...doc.data(),
+//       id: doc.id,
+//     })) as Van[];
+//     return vans;
+//   } catch (error) {
+//     console.log({ error });
+//     throw new Error("Failed to fetch vans");
+//   }
+// }
+
+// export async function getVan(id: string): Promise<Van> {
+//   try {
+//     const docRef = doc(db, "vans", id);
+//     const snapshot = await getDoc(docRef);
+//     const van = {
+//       ...snapshot.data(),
+//       id: snapshot.id,
+//     } as Van;
+//     return van;
+//   } catch (error) {
+//     console.log({ error });
+//     throw new Error("Failed to fetch van");
+//   }
+// }
+
+// export async function getHostVans(hostId: string): Promise<Van[]> {
+//   try {
+//     const q = query(vansCollection, where("hostId", "==", hostId));
+//     const snapshot = await getDocs(q);
+//     const vans = snapshot.docs.map((doc) => ({
+//       ...doc.data(),
+//       id: doc.id,
+//     })) as Van[];
+//     return vans;
+//   } catch (error) {
+//     console.log({ error });
+//     throw new Error("Failed to fetch host vans");
+//   }
+// }
+
+// export async function getHostVan(hostId: string, id: string): Promise<Van> {
+//   try {
+//     const q = query(
+//       vansCollection,
+//       where("hostId", "==", hostId),
+//       where("id", "==", id),
+//     );
+//     const snapshot = await getDocs(q);
+//     const hostVan = {
+//       ...snapshot.docs[0].data(),
+//       id: snapshot.docs[0].id,
+//     } as Van;
+//     return hostVan;
+//   } catch (error) {
+//     console.log({ error });
+//     throw new Error("Failed to fetch host van");
+//   }
+// }
+
+// export async function getUser(creds: InputType): Promise<Creds> {
+//   try {
+//     const q = query(
+//       usersCollection,
+//       where("email", "==", creds.email),
+//       where("password", "==", creds.password),
+//     );
+//     const snapshot = await getDocs(q);
+//     const user = snapshot.docs[0].data() as Creds;
+//     return user;
+//   } catch (error) {
+//     console.log({ error });
+//     throw new Error("Failed to fetch user");
+//   }
+// }
+
+// export async function getTransactions(hostId: string): Promise<Transaction[]> {
+//   try {
+//     const q = query(transactionsCollection, where("userId", "==", hostId));
+//     const snapshot = await getDocs(q);
+//     const transactions = snapshot.docs.map((doc) => ({
+//       ...doc.data(),
+//       id: doc.id,
+//     })) as Transaction[];
+//     return transactions;
+//   } catch (error) {
+//     console.log({ error });
+//     throw new Error("Failed to fetch transactions");
+//   }
+// }
+
+// export async function getReviews(hostId: string): Promise<Review[]> {
+//   try {
+//     const q = query(reviewsCollection, where("hostId", "==", hostId));
+//     const snapshot = await getDocs(q);
+//     const reviews = snapshot.docs.map((doc) => ({
+//       ...doc.data(),
+//       id: doc.id,
+//     })) as Review[];
+//     return reviews;
+//   } catch (error) {
+//     console.log({ error });
+//     throw new Error("Failed to fetch reviews");
+//   }
+// }

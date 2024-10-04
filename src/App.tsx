@@ -14,11 +14,11 @@ import { HostVanInfo } from "./pages/Host/HostVanInfo";
 import { HostVanPrice } from "./pages/Host/HostVanPrice";
 import { HostVanPhoto } from "./pages/Host/HostVanPhoto";
 import { Error } from "./Components/Error";
-import { VansError } from "./Components/VansError";
 import { vansLoader, vanLoader } from "./loaders";
 import { Login } from "./Components/Login";
 import { loginAction } from "./actions";
 import { requireAuth } from "./utils";
+import Error2 from "./Components/Error2";
 
 // import "./server";
 
@@ -39,19 +39,19 @@ const router = createBrowserRouter([
         path: "vans",
         element: <Vans />,
         loader: vansLoader,
-        errorElement: <Error />,
+        errorElement: <Error2 message="Failed to load vans" />,
       },
       {
         path: "login",
         element: <Login />,
         action: loginAction,
-        errorElement: <div>error</div>,
+        errorElement: <Error />,
       },
       {
         path: "vans/:id",
         element: <VanDetails />,
         loader: ({ params }) => vanLoader({ params }),
-        errorElement: <VansError />,
+        errorElement: <Error2 message="Failed to load van details" />,
       },
       {
         path: "host",
