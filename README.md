@@ -1,30 +1,7 @@
-# React + TypeScript + Vite
+# Van-life-typescript
+## Description
+This project, originally created for the Scrimba React Router 6 course, demonstrates the application of React Router for routing and navigation within a web application. While the original course used JavaScript and traditional styling methods, this version has been enhanced with TypeScript for improved type safety and maintainability. Additionally, Tailwind CSS has been incorporated to streamline styling and create visually appealing components.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+To replace static images for charts, this project leverages the powerful charting libraries Recharts and Tremor. These libraries enable the dynamic generation of charts based on data, providing more interactive and informative visualizations.
+## Deployment
+This is a link to [Van-life-typescript](https://https://vanlife-typescript.web.app/)
