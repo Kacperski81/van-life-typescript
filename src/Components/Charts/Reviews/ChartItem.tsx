@@ -1,6 +1,12 @@
 import { Review } from "../../../types";
 
-export default function ChartItem({ value, reviews }: { value: number, reviews: Review[] }) {
+export default function ChartItem({
+  value,
+  reviews,
+}: {
+  value: number;
+  reviews: Review[];
+}) {
   const totalReviews = reviews.length;
   const fiveStarReviews = reviews.filter(
     (review) => review.rating === 5,
@@ -48,11 +54,11 @@ export default function ChartItem({ value, reviews }: { value: number, reviews: 
 
   const percent = getPercent(value)?.toFixed();
   return (
-    <div className="grid grid-cols-[3fr_9fr_3fr] sm:grid sm:grid-cols-[2fr_10fr_2fr] items-center py-1 text-base text-[#4D4D4D] lg:grid lg:grid-cols-[60px_400px_100px]">
+    <div className="grid grid-cols-[3fr_9fr_3fr] items-center py-1 text-base text-[#4D4D4D] sm:grid sm:grid-cols-[2fr_10fr_2fr] lg:grid lg:grid-cols-[60px_400px_100px] ">
       <h4 className="text-left">
         {value} star{value === 1 ? "" : "s"}
       </h4>
-      <span className="flex h-1/3 items-center bg-[#B9B9B9] rounded-lg">
+      <span className="flex h-1/3 items-center rounded-lg bg-[#B9B9B9]">
         <span
           className={`h-full rounded-lg bg-orange-500`}
           style={{ width: `${percent}%`, transition: "width .5s" }}
