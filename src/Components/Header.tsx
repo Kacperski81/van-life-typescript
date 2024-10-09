@@ -71,7 +71,7 @@ export function Header({ navToggle, handleNavToggle }: HeaderProps) {
             <li className="md:flex md:justify-center">
               <NavLink
                 onClick={() => {
-                  sessionStorage.removeItem("isLoggedIn");
+                  localStorage.removeItem("isLoggedIn");
                   dispatch(logoutUser());
                   return navigate("/");
                 }}

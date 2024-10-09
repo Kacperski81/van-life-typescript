@@ -14,12 +14,12 @@ export default function useLayout() {
 
   useEffect(() => {
     const handleBeforeUnload = () => {
-      sessionStorage.removeItem("isLoggedIn")
+      localStorage.removeItem("isLoggedIn")
     }
     window.addEventListener("beforeunload", handleBeforeUnload);
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
-      sessionStorage.removeItem("isLoggedIn");
+      localStorage.removeItem("isLoggedIn");
     }
   }, [])
 

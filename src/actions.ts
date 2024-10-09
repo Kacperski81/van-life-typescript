@@ -10,7 +10,7 @@ export async function loginAction() {
     const transactions = await getTransactions(user.id);
     const vans = await getHostVans(user.id);
     const reviews = await getReviews(user.id);
-    sessionStorage.setItem("isLoggedIn", "true");
+    localStorage.setItem("isLoggedIn", "true");
     return {
       incomeDays: 0,
       reviewsDays: 0,

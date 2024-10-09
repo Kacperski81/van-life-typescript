@@ -12,12 +12,12 @@ export function stringToDate(dateString: string) {
 
 export async function requireAuth() {
   const isLoggedIn = JSON.parse(
-    sessionStorage.getItem("isLoggedIn") || "false",
+    localStorage.getItem("isLoggedIn") || "false",
   );
   if (!isLoggedIn) {
     throw {
       redirect: "/login",
-      state: {abc: "dev"},
+      // state: {abc: "dev"},
     };
   }
   // console.log(isLoggedIn)
