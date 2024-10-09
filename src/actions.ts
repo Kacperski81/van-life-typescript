@@ -8,6 +8,7 @@ export async function loginAction() {
   try {
     const user = await getUser(creds);
     const transactions = await getTransactions(user.id);
+    console.log({transactions})
     const vans = await getHostVans(user.id);
     const reviews = await getReviews(user.id);
     sessionStorage.setItem("isLoggedIn", "true");

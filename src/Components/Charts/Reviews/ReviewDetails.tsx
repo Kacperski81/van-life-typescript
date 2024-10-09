@@ -1,7 +1,8 @@
 import { Review } from "../../../types";
 import { BsStarFill } from "react-icons/bs";
+import { convertTimestampToMoment } from "../../../utils";
 export default function ReviewDetails({ review }: { review: Review }) {
-  const [day, month] = review.date.split("/").map(Number);
+  const [day, month] = convertTimestampToMoment(review.date).format("DD/MM").split("/").map(Number);
   const reviewDate = new Date(2024, month-1, day).toLocaleDateString("en-UK", {
     day: "numeric",
     month: "long",

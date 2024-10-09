@@ -1,6 +1,7 @@
 // import { useState } from "react";
 import { cx } from "../lib/utils";
 import { Transaction } from "../types";
+import { convertTimestampToMoment } from "../utils";
 import { BarChart, TooltipProps } from "./Charts/BarChart";
 const valueFormatter = (number: number) => {
   return Intl.NumberFormat("uk").format(number).toString();
@@ -77,8 +78,9 @@ export default function StackedBarChart({
   transactions: Transaction[];
 }) {
   const dataToChart2 = transactions.map((transaction) => {
+    console.log(convertTimestampToMoment(transaction.date).format("DD/MM"));
     return {
-      date: transaction.date,
+      date: convertTimestampToMoment(transaction.date).format("DD/MM"),
       total: transaction.total,
       luxury: transaction.luxury.price,
       rugged: transaction.rugged.price,

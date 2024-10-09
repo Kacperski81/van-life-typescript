@@ -7,7 +7,10 @@ export type Van = {
   type: string;
   hostId: string;
 };
-
+export type FirestoreTimestamp = {
+  seconds: number;
+  nanoseconds: number;
+}
 export type Creds = {
     name: string;
     id: string;
@@ -48,7 +51,7 @@ export type InputType = {
 
 export type Transaction = {
   userId: string;
-  date: string;
+  date: FirestoreTimestamp;
   id: string;
   total: number;
   simple: {
@@ -71,7 +74,7 @@ export type Transaction = {
 export type Review = {
   rating: number;
   name: string;
-  date: string;
+  date: FirestoreTimestamp;
   text: string;
   id: string;
   vanId: string;

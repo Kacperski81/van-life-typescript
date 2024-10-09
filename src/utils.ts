@@ -1,13 +1,13 @@
 import { UserState } from "./types";
 // import { useUser } from "./hooks/useUser";
+import moment from "moment";
 
 export async function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 export function stringToDate(dateString: string) {
-  const [day, month] = dateString.split("/").map(Number);
-  return new Date(2024, month - 1, day);
+  return dateString;
 }
 
 export async function requireAuth() {
@@ -38,7 +38,7 @@ export const initialUserState: UserState = {
   transactions: [
     {
       total: 0,
-      date: "",
+      date: { seconds: 0, nanoseconds: 0 },
       id: "",
       userId: "",
       simple: {
@@ -73,10 +73,18 @@ export const initialUserState: UserState = {
     {
       rating: 0,
       name: "",
-      date: "",
+      date: { seconds: 0, nanoseconds: 0 },
       text: "",
       id: "",
       vanId: "",
     },
   ],
+};
+
+export const convertTimestampToMoment = (timestamp: {
+  seconds: number;
+  nanoseconds: number;
+}) => {
+  return moment
+    .unix(timestamp.seconds)
 };

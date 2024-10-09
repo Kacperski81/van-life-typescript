@@ -1,5 +1,5 @@
 import { useUser } from "../UserContext";
-import moment from "moment";
+import { convertTimestampToMoment } from "../utils";
 
 export default function useIncome() {
   const {
@@ -7,9 +7,21 @@ export default function useIncome() {
     dispatch,
   } = useUser();
 
+  console.log({ transactions });
+
+  // const sortedTransactions = transactions.sort((a, b) => {
+  //   return moment(a.date).valueOf() - moment(b.date).valueOf();
+  // });
+
+
+  // Parse and sort transactions using moment.js
   const sortedTransactions = transactions.sort((a, b) => {
-    return moment(a.date).valueOf() - moment(b.date).valueOf();
+    const dateA = convertTimestampToMoment(a.date);
+    const dateB = convertTimestampToMoment(b.date);
+    return dateA.diff(dateB);
   });
+
+  // console.log(sortedTransactions)
 
   const filteredTransactions = sortedTransactions.slice(
     sortedTransactions.length - incomeDays,
@@ -31,5 +43,5 @@ export default function useIncome() {
     }
   }, 0);
 
-  return {incomeDays, amount, filteredTransactions, dispatch};
+  return { incomeDays, amount, filteredTransactions, dispatch };
 }

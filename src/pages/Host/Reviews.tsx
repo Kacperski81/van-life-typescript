@@ -3,23 +3,25 @@ import { useUser } from "../../UserContext";
 import ReviewsChart from "../../Components/Charts/Reviews/ReviewsChart";
 import { changeReviewsDays } from "../../reducer/reducer";
 import ReviewsSorter from "../../Components/Host/ReviewsSorter";
+import { convertTimestampToMoment } from "../../utils";
 export function Reviews() {
   const {
     state: { reviewsDays, reviews, transactions },
     dispatch,
   } = useUser();
-  function stringToDate(dateString: string) {
-    const [day, month] = dateString.split("/").map(Number);
-    return new Date(2024, month - 1, day);
-  }
+  // function stringToDate(dateString: string) {
+  //   const [day, month] = dateString.split("/").map(Number);
+  //   return new Date(2024, month - 1, day);
+  // }
   
   const filteredReviews2 = reviews.filter((review) => {
     const firstDay = transactions.slice(transactions.length - reviewsDays)[0]
       .date;
 
-    const date = stringToDate(firstDay);
-    if (new Date(stringToDate(review.date)) >= date) {
-      return true;
+    const date = convertTimestampToMoment(firstDay).format("DD/MM");
+    const reviewDate = convertTimestampToMoment(review.date).format("DD/MM");
+    if(date <= reviewDate) {
+      return review;
     }
   });
   const averageRating =

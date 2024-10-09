@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Transaction } from "../../types";
-import { stringToDate } from "../../utils";
+import { convertTimestampToMoment } from "../../utils";
 
 export default function TransactionsDetails({
   filteredTransactions,
@@ -9,11 +9,13 @@ export default function TransactionsDetails({
 }) {
   const [sort, setSort] = useState("asc");
   const sortedTransactions = filteredTransactions.sort((a,b) => {
+    const dateA = convertTimestampToMoment(a.date);
+    const dateB = convertTimestampToMoment(b.date);
     switch (sort) {
       case "asc":
-        return new Date(a.date).getTime() - new Date(b.date).getTime();
+        return dateA.diff(dateB);
       case "desc":
-        return new Date(b.date).getTime() - new Date(a.date).getTime();
+        return dateB.diff(dateA);
       default:
         return 0;
     }
@@ -34,7 +36,7 @@ export default function TransactionsDetails({
       </div>
       <div className="custom-scrollbar flex flex-col gap-2 rounded-lg md:h-[220px] md:w-[550px] md:overflow-y-auto md:px-2">
         {sortedTransactions.map((transaction) => {
-          const date = stringToDate(transaction.date).toLocaleDateString();
+          const date = convertTimestampToMoment(transaction.date).format("DD/MM");
           return (
             <div
               key={transaction.id}
