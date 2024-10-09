@@ -17,8 +17,7 @@ export default function useReviews() {
   });
   const firstDay = sortedTransactions.slice(sortedTransactions.length - reviewsDays)[0]
     .date
-  const firstDay2 = convertTimestampToMoment(firstDay).format("DD/MM");
-  console.log({firstDay2})
+
   const filteredReviews2 = sortedReviews.filter((review) => {
     const date = convertTimestampToMoment(firstDay).format("DD/MM");
     const reviewDate = convertTimestampToMoment(review.date).format("DD/MM");

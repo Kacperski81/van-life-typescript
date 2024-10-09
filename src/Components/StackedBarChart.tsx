@@ -78,7 +78,6 @@ export default function StackedBarChart({
   transactions: Transaction[];
 }) {
   const dataToChart2 = transactions.map((transaction) => {
-    console.log(convertTimestampToMoment(transaction.date).format("DD/MM"));
     return {
       date: convertTimestampToMoment(transaction.date).format("DD/MM"),
       total: transaction.total,

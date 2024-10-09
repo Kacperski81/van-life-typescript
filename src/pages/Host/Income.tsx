@@ -7,7 +7,6 @@ import TransactionsDetails from "../../Components/Host/TransactionsDetails";
 
 export function Income() {
   const { incomeDays, amount, filteredTransactions, dispatch } = useIncome();
-  console.log({ filteredTransactions });
 
   return (
     <section className="mx-auto max-w-[550px] px-4 py-3 md:mx-0 md:min-w-[600px] md:py-0 lg:max-w-[800px]">
