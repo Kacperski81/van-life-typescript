@@ -1,6 +1,6 @@
 // import { useUser } from "../../UserContext";
 import { changeReviewsDays } from "../../reducer/reducer";
-import { useReviews } from "../../hooks/useReviews";
+import { useReviews } from "../../hooks/useDashboardReviews";
 export default function RangeInput() {
 
   const { reviewsDays, dispatch } = useReviews()

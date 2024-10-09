@@ -1,9 +1,9 @@
 import { BsStarFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import { useReviews } from "../../hooks/useReviews";
+import { useDashboardReviews } from "../../hooks/useDashboardReviews";
 export default function DashboardReviews() {
-
-  const { averageRating } = useReviews();
+  
+  const { averageRating } = useDashboardReviews();
   return (
     <section className="flex w-full items-center gap-2 bg-[#FFDDB2] px-4 py-8 md:col-start-1 md:min-w-[600px]">
       <h3 className="text-2xl font-bold">Review score</h3>
