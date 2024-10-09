@@ -23,7 +23,7 @@ export default function DashboardIncome() {
   return (
     <section className="flex grow bg-[#FFEAD0] px-4 py-4 md:min-w-[600px]">
       <div className="flex grow flex-col gap-5">
-        <h2 className="text-4xl">Welcome !</h2>
+        <h2 className="text-4xl">Welcome ! Refactor 4</h2>
         <p className="flex items-center gap-2 text-sm sm:text-base">
           <span className="">Income last </span>
           <input
