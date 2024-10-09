@@ -1,4 +1,4 @@
-import { stringToDate } from "../utils";
+import { convertTimestampToMoment } from "../utils";
 import { useUser } from "../UserContext";
 export function useReviews() {
   const {
@@ -9,8 +9,9 @@ export function useReviews() {
     const firstDay = transactions.slice(transactions.length - dashboardDays)[0]
       .date;
 
-    const date = stringToDate(firstDay);
-    if (new Date(stringToDate(review.date)) >= date) {
+    const date = convertTimestampToMoment(firstDay).format("DD/MM");
+    const reviewDate = convertTimestampToMoment(review.date).format("DD/MM");
+    if (date <= reviewDate) {
       return true;
     }
   });

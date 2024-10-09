@@ -7,7 +7,6 @@ export default function useIncome() {
     dispatch,
   } = useUser();
 
-  console.log({ transactions });
 
   // const sortedTransactions = transactions.sort((a, b) => {
   //   return moment(a.date).valueOf() - moment(b.date).valueOf();
