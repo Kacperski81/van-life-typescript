@@ -1,4 +1,5 @@
 import { useUser } from "../UserContext";
+import moment from "moment";
 
 export default function useIncome() {
   const {
@@ -7,7 +8,7 @@ export default function useIncome() {
   } = useUser();
 
   const sortedTransactions = transactions.sort((a, b) => {
-    return new Date(a.date).getTime() - new Date(b.date).getTime();
+    return moment(a.date).valueOf() - moment(b.date).valueOf();
   });
 
   const filteredTransactions = sortedTransactions.slice(
