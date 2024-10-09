@@ -11,9 +11,7 @@ export function stringToDate(dateString: string) {
 }
 
 export async function requireAuth() {
-  const isLoggedIn = JSON.parse(
-    localStorage.getItem("isLoggedIn") || "false",
-  );
+  const isLoggedIn = JSON.parse(localStorage.getItem("isLoggedIn") || "false");
   if (!isLoggedIn) {
     throw {
       redirect: "/login",
@@ -85,6 +83,5 @@ export const convertTimestampToMoment = (timestamp: {
   seconds: number;
   nanoseconds: number;
 }) => {
-  return moment
-    .unix(timestamp.seconds)
+  return moment.unix(timestamp.seconds);
 };

@@ -56,7 +56,7 @@ const router = createBrowserRouter([
       {
         path: "host",
         element: <HostLayout />,
-        loader: () => requireAuth(),
+        loader: requireAuth,
         errorElement: <Error />,
         children: [
           {
