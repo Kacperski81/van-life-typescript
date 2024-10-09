@@ -1,12 +1,19 @@
+import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import { Header } from "../Components/Header";
 import { Footer } from "../Components/Footer";
 import clsx from "clsx";
 import { UserProvider } from "../UserProvider";
 import useLayout from "../hooks/useLayout";
+import { isSafariBrowser } from "../utils";
 
 export function Layout() {
   const { navToggle, handleNavToggle } = useLayout();
+  useEffect(() => {
+    if (isSafariBrowser()) {
+      localStorage.removeItem("isLoggedIn");
+    }
+  }, []);
   return (
     <div
       className={clsx(

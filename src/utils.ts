@@ -9,6 +9,10 @@ export async function sleep(ms: number) {
 export function stringToDate(dateString: string) {
   return dateString;
 }
+export function isSafariBrowser() {
+  const userBrowser = navigator.userAgent.toLocaleLowerCase();
+  return userBrowser.includes("safari")
+}
 
 export async function requireAuth() {
   const isLoggedIn = JSON.parse(localStorage.getItem("isLoggedIn") || "false");
