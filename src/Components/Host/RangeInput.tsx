@@ -1,9 +1,9 @@
 // import { useUser } from "../../UserContext";
 import { changeReviewsDays } from "../../reducer/reducer";
-import { useReviews } from "../../hooks/useDashboardReviews";
+import { useDashboardReviews } from "../../hooks/useDashboardReviews";
 export default function RangeInput() {
 
-  const { reviewsDays, dispatch } = useReviews()
+  const { reviewsDays, dispatch } = useDashboardReviews()
 
   return (
     <div className="flex gap-1 my-4">
