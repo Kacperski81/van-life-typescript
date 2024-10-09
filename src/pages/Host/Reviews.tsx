@@ -28,7 +28,7 @@ export function Reviews() {
 
   return (
     <section className="mx-auto max-w-[550px] px-4 py-3 md:mx-0 md:min-w-[600px] md:py-0 lg:max-w-[800px]">
-      <h2>Your reviews</h2>
+      <h2>Your reviews refactor3</h2>
       <div className="my-4 flex gap-1">
         <span>Last </span>
         <input
