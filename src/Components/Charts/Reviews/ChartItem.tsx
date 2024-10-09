@@ -54,7 +54,7 @@ export default function ChartItem({
 
   const percent = getPercent(value)?.toFixed();
   return (
-    <div className="grid grid-cols-[3fr_9fr_3fr] items-center py-1 text-base text-[#4D4D4D] sm:grid sm:grid-cols-[2fr_10fr_2fr] lg:grid lg:grid-cols-[60px_400px_100px] ">
+    <div className="grid grid-cols-[3fr_9fr_3fr] items-center py-1 text-base text-[#4D4D4D] sm:grid sm:grid-cols-[2fr_10fr_2fr] lg:grid lg:grid-cols-[60px_400px_100px] h-[24px] bg-red-500">
       <h4 className="text-left">
         {value} star{value === 1 ? "" : "s"}
       </h4>
