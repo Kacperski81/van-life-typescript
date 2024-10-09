@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function useLayout() {
   const [navToggle, setNavToggle] = useState<boolean>(true);
   const location = useLocation();
-
+  const navigate = useNavigate();
   useEffect(() => {
     setNavToggle(true);
   }, [location.pathname]);
@@ -23,6 +23,13 @@ export default function useLayout() {
       sessionStorage.removeItem("isLoggedIn");
     }
   }, [])
+
+  useEffect(() => {
+    const isLoggedIn = sessionStorage.getItem("isLoggedIn");
+    if (!isLoggedIn) {
+      navigate("/login");
+    }
+  }, [navigate])
 
   return { navToggle, handleNavToggle}
 }

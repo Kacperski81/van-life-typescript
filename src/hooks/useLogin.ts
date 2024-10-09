@@ -26,6 +26,8 @@ export default function useLogin() {
       dispatch(
         loginUser(loggedUser, vanType, userTransactions, userVans, reviews),
       );
+      //aded this line
+      sessionStorage.setItem("isLoggedIn", "true");
       navigate(memoUrl.current);
     }
   }, [actionData, navigate, dispatch]);
