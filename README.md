@@ -4,4 +4,4 @@ This project, originally created for the Scrimba React Router 6 course, demonstr
 
 To replace static images for charts, this project leverages the powerful charting libraries Recharts and Tremor. These libraries enable the dynamic generation of charts based on data, providing more interactive and informative visualizations.
 ## Deployment
-This is a link to www.vanlife-typescript.web.app/
+This is a link to https://www.vanlife-typescript.web.app/
